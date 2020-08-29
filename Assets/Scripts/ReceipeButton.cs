@@ -11,7 +11,16 @@ public class ReceipeButton : MonoBehaviour
     public List<string> materials;
     [Tooltip("corresponding amount")]
     public List<int> amount;
+    public int cost;
 
+    public void createReceipe()
+    {
+        Receipe rece = new Receipe(receipeName, type);
+        for (int i=0; i<materials.Count;i++)
+        {
+            rece.addIngredient(materials[i],amount[i]);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

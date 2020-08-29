@@ -10,12 +10,6 @@ public class FarmItem : MonoBehaviour
 
     private bool Growing;
     private float startGrowTime;
-    private Farm farm;
-
-    public FarmItem()
-    {
-
-    }
 
     public void setProps(string str, int num, float time)
     {
@@ -27,7 +21,6 @@ public class FarmItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        farm = GameObject.Find("Farm").GetComponent<Farm>();
         Debug.Log("Start grow " + matName);
         Growing = true;
         startGrowTime = Time.time;
@@ -47,8 +40,8 @@ public class FarmItem : MonoBehaviour
         {
             Debug.Log("Growed " + matName);
             Growing = false;
-            farm.addGrowedItem(gameObject);
-            farm.addMaterial(matName,amount);
+            SceneManager.Instance.farm.addGrowedItem(gameObject);
+            SceneManager.Instance.farm.addMaterial(matName,amount);
         }
     }
 }

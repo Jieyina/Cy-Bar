@@ -55,17 +55,39 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\ModifiedShadow.cs" />
+    <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\BoxOutline.cs" />
+    <Compile Include="Assets\Scripts\ReceipeButton.cs" />
+    <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\CircleOutline.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\FarmButton.cs" />
+    <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\ListPool.cs" />
     <Compile Include="Assets\Scripts\FarmItem.cs" />
+    <Compile Include="Assets\ArtRes\UI\unity-ui-extensions\sft.cs" />
     <Compile Include="Assets\Scripts\Farm.cs" />
+    <Compile Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Scripts\Effects\UIParticleSystem.cs" />
+    <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\Factory.cs" />
     <Compile Include="Assets\Scripts\Bar.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\ReceipeButton.cs" />
-    <Compile Include="Assets\Scripts\Factory.cs" />
+    <Compile Include="Assets\ArtRes\UltimateBillboard\Bonus Assets\Scripts\CamMove.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\Outline8.cs" />
+    <Compile Include="Assets\Scripts\Receipe.cs" />
+    <Compile Include="Assets\Scripts\SceneManager.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle Add.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle Multiply.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle Alpha Blend.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle Premultiply Blend.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle VertexLit Blended.shader" />
+     <None Include="Assets\ArtRes\UltimateBillboard\Shaders\UltimateBillboard.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle MultiplyDouble.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle AddMultiply.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle Blend.shader" />
+     <None Include="Assets\ArtRes\Mat\SimpleBillboard.shader" />
+     <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle AddSmooth.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

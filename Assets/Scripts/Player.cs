@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public void spendMoney(int cost)
     {
         money -= cost;
-        UIManager.instance.updateMoney(money);
+        SceneManager.Instance.ui.updateMoney(money);
     }
 
     public bool canAfford(int cost)
