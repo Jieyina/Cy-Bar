@@ -6,7 +6,8 @@ public class Factory : MonoBehaviour
 {
     private List<Receipe> learnedFood = new List<Receipe>();
     private List<Receipe> learnedDrink = new List<Receipe>();
-    private List<KeyValuePair<GameObject,Receipe>> requiredDish = new List<KeyValuePair<GameObject, Receipe>>();
+    private List<KeyValuePair<Receipe,GameObject>> orderedDish = new List<KeyValuePair<Receipe, GameObject>>();
+    private Dictionary<GameObject, List<Receipe>> orders = new Dictionary<GameObject, List<Receipe>>();
 
     public void AddFood(Receipe rec)
     {
