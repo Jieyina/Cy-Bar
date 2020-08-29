@@ -7,17 +7,19 @@ public class FarmButton : MonoBehaviour
     public string matName;
     public int produceNum;
     public float growTime;
+    public int cost;
     public GameObject shadePrefab;
     public GameObject item;
-    public Farm farm;
 
     private GameObject shadow;
     private RaycastHit hit;
+    private Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Get Player");
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class FarmButton : MonoBehaviour
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
                     newItem.transform.parent = GameObject.Find("Farm").transform;
                     newItem.GetComponent<FarmItem>().setProps(matName, produceNum, growTime);
-                    farm.GrowMaterial(matName, produceNum, growTime);
+                    hit.transform.gameObject.layer = 0;
                     Destroy(shadow);
                     shadow = null;
                 }
@@ -60,8 +62,9 @@ public class FarmButton : MonoBehaviour
 
     public void createSeed()
     {
-        if (!shadow)
+        if (!shadow && player.canAfford(cost))
         {
+            player.spendMoney(cost);
             shadow = Instantiate(shadePrefab);
         }
     }

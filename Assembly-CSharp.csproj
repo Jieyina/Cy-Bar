@@ -55,11 +55,15 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\Farm.cs" />
-    <Compile Include="Assets\Scripts\Bar.cs" />
     <Compile Include="Assets\Scripts\FarmButton.cs" />
     <Compile Include="Assets\Scripts\FarmItem.cs" />
+    <Compile Include="Assets\Scripts\Farm.cs" />
+    <Compile Include="Assets\Scripts\Bar.cs" />
+    <Compile Include="Assets\Scripts\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\ReceipeButton.cs" />
+    <Compile Include="Assets\Scripts\Factory.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
