@@ -41,9 +41,10 @@ public class FarmButton : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
-                    newItem.transform.parent = SceneManager.Instance.farm.transform;
-                    newItem.GetComponent<FarmItem>().setProps(matName, produceNum, growTime);
+                    newItem.transform.parent = SceneManager.Instance.Farm.transform;
+                    newItem.GetComponent<FarmItem>().SetProps(matName, produceNum, growTime);
                     hit.transform.gameObject.layer = 0;
+                    SceneManager.Instance.Player.spendMoney(cost);
                     Destroy(shadow);
                     shadow = null;
                 }
@@ -60,9 +61,8 @@ public class FarmButton : MonoBehaviour
 
     public void createSeed()
     {
-        if (!shadow && SceneManager.Instance.player.canAfford(cost))
+        if (!shadow && SceneManager.Instance.Player.canAfford(cost))
         {
-            SceneManager.Instance.player.spendMoney(cost);
             shadow = Instantiate(shadePrefab);
         }
     }

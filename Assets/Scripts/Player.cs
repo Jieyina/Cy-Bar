@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int initMoney;
     private int money;
 
     public void spendMoney(int cost)
     {
         money -= cost;
-        SceneManager.Instance.ui.updateMoney(money);
+        SceneManager.Instance.UI.updateMoney(money);
     }
 
     public bool canAfford(int cost)
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        money = 50;
+        money = initMoney;
     }
 
     // Update is called once per frame

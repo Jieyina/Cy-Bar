@@ -7,12 +7,12 @@ public class Farm : MonoBehaviour
     private Dictionary<string, int> rawMat = new Dictionary<string, int>();
     private List<GameObject> growedItems = new List<GameObject>();
 
-    public void addGrowedItem(GameObject item)
+    public void AddGrowedItem(GameObject item)
     {
         growedItems.Add(item);
     }
 
-    public void addMaterial(string str, int num)
+    public void AddMaterial(string str, int num)
     {
         if (rawMat.ContainsKey(str))
             rawMat[str] += num;

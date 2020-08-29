@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Receipe : ScriptableObject
+public class Receipe
 {
-    private string receipeName;
-    private int type;
+    public string ReceipeName { get; }
+    public int Type { get; }
     private Dictionary<string, int> ingredients;
 
     public Receipe(string str, int t)
     {
-        receipeName = str;
-        type = t;
+        ReceipeName = str;
+        Type = t;
         ingredients = new Dictionary<string, int>();
     }
 
-    public void addIngredient(string str, int num)
+    public void AddIngredient(string str, int num)
     {
         ingredients.Add(str,num);
+    }
+
+    public void PrintIngredients()
+    {
+        foreach (KeyValuePair<string,int> pair in ingredients)
+        {
+            Debug.Log(pair.Key + " x " +pair.Value.ToString());
+        }
     }
 }

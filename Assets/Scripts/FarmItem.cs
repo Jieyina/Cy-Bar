@@ -11,7 +11,7 @@ public class FarmItem : MonoBehaviour
     private bool Growing;
     private float startGrowTime;
 
-    public void setProps(string str, int num, float time)
+    public void SetProps(string str, int num, float time)
     {
         matName = str;
         amount = num;
@@ -26,7 +26,7 @@ public class FarmItem : MonoBehaviour
         startGrowTime = Time.time;
     }
 
-    public void restartGrow()
+    public void RestartGrow()
     {
         Debug.Log("Start grow " + matName);
         Growing = true;
@@ -40,8 +40,8 @@ public class FarmItem : MonoBehaviour
         {
             Debug.Log("Growed " + matName);
             Growing = false;
-            SceneManager.Instance.farm.addGrowedItem(gameObject);
-            SceneManager.Instance.farm.addMaterial(matName,amount);
+            SceneManager.Instance.Farm.AddGrowedItem(gameObject);
+            SceneManager.Instance.Farm.AddMaterial(matName,amount);
         }
     }
 }

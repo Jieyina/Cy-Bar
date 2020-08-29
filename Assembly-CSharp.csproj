@@ -58,6 +58,8 @@
     <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\ModifiedShadow.cs" />
     <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\BoxOutline.cs" />
     <Compile Include="Assets\Scripts\ReceipeButton.cs" />
+    <Compile Include="Assets\Scripts\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\Receipe.cs" />
     <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\CircleOutline.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\FarmButton.cs" />
@@ -73,8 +75,8 @@
     <Compile Include="Assets\ArtRes\UltimateBillboard\Bonus Assets\Scripts\CamMove.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\ArtRes\Font\TextOutline\VertexEffects\Scripts\Outline8.cs" />
-    <Compile Include="Assets\Scripts\Receipe.cs" />
-    <Compile Include="Assets\Scripts\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\BarButton.cs" />
+    <Compile Include="Assets\Scripts\BarTable.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ArtRes\UI\unity-ui-extensions\Runtime\Resources\Shaders\UI Particle Add.shader" />

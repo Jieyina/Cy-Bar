@@ -15,10 +15,19 @@ public class ReceipeButton : MonoBehaviour
 
     public void createReceipe()
     {
-        Receipe rece = new Receipe(receipeName, type);
-        for (int i=0; i<materials.Count;i++)
+        if (SceneManager.Instance.Player.canAfford(cost))
         {
-            rece.addIngredient(materials[i],amount[i]);
+            SceneManager.Instance.Player.spendMoney(cost);
+            Receipe rece = new Receipe(receipeName, type);
+            for (int i = 0; i < materials.Count; i++)
+            {
+                rece.AddIngredient(materials[i], amount[i]);
+            }
+            if (rece.Type == 1)
+                SceneManager.Instance.Factory.AddFood(rece);
+            else if (rece.Type == 2)
+                SceneManager.Instance.Factory.AddDrink(rece);
+            Destroy(gameObject);
         }
     }
 
