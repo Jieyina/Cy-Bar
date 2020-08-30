@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BarFloor
-  m_Shader: {fileID: 4800000, guid: 9973644de4d1c8e48beccdcd7fffad80, type: 3}
+  m_Name: ForstedGlass
+  m_Shader: {fileID: 4800000, guid: c959acb9d21003548920723ba64b2854, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -56,29 +56,24 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaScale: 0.558
-    - _BasePower: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionPower: 1.45
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutLineWidth: 0.1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - _blurSizeXY: 2
     m_Colors:
-    - _Color: {r: 0.27634388, g: 0.7643704, b: 0.8490566, a: 1}
-    - _EmissionColor: {r: 0.7550683, g: 0.11053756, b: 0.8679245, a: 1}
-    - _Gradient: {r: 1, g: 15, b: 1, a: 0.2}
-    - _OutLineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
