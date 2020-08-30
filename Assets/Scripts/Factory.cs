@@ -4,29 +4,67 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
-    private List<Receipe> learnedFood = new List<Receipe>();
-    private List<Receipe> learnedDrink = new List<Receipe>();
-    private List<KeyValuePair<Receipe,GameObject>> orderedDish = new List<KeyValuePair<Receipe, GameObject>>();
-    private Dictionary<GameObject, List<Receipe>> orders = new Dictionary<GameObject, List<Receipe>>();
+    private List<Receipe> food = new List<Receipe>();
+    private List<Receipe> drink = new List<Receipe>();
+    private Dictionary<Receipe, List<GameObject>> idleFactories = new Dictionary<Receipe, List<GameObject>>();
+
+    public Receipe LearnedFood(Receipe rec)
+    {
+        foreach (Receipe rece in food)
+        {
+            if (rece.ReceipeName == rec.ReceipeName)
+                return rece;
+        }
+        return null;
+    }
+
+    public Receipe LearnedDrink(Receipe rec)
+    {
+        foreach (Receipe rece in drink)
+        {
+            if (rece.ReceipeName == rec.ReceipeName)
+                return rece;
+        }
+        return null;
+    }
+
+    public void AddFactory(Receipe receipe, GameObject obj)
+    {
+        if (!idleFactories.ContainsKey(receipe))
+        {
+            Debug.Log("factory of new receipe");
+            idleFactories.Add(receipe, new List<GameObject>());
+        }
+        idleFactories[receipe].Add(obj);
+    }
+
+    public void RemoveFactory(Receipe receipe, GameObject obj)
+    {
+        idleFactories[receipe].Remove(obj);
+    }
 
     public void AddFood(Receipe rec)
     {
-        Debug.Log("Add receipe " + rec.ReceipeName);
-        rec.PrintIngredients();
-        learnedFood.Add(rec);
+        if (!food.Contains(rec))
+        {
+            Debug.Log("new receipe " + rec.ReceipeName);
+            rec.PrintIngredients();
+            food.Add(rec);
+        }
     }
 
     public void AddDrink(Receipe rec)
     {
-        learnedDrink.Add(rec);
+        if (!drink.Contains(rec))
+            drink.Add(rec);
     }
 
     public Receipe GetRandomFood()
     {
-        if (learnedFood.Count != 0)
+        if (food.Count != 0)
         {
-            int index = Random.Range(0, learnedFood.Count - 1);
-            return learnedFood[index];
+            int index = Random.Range(0, food.Count - 1);
+            return food[index];
         }
         else
             return null;
@@ -34,13 +72,24 @@ public class Factory : MonoBehaviour
 
     public Receipe GetRandomDrink()
     {
-        if (learnedDrink.Count != 0)
+        if (drink.Count != 0)
         {
-            int index = Random.Range(0, learnedDrink.Count - 1);
-            return learnedDrink[index];
+            int index = Random.Range(0, drink.Count - 1);
+            return drink[index];
         }
         else
             return null;
+    }
+
+    public bool HasIdleFactory(Receipe rec)
+    {
+        return idleFactories[rec].Count != 0;
+    }
+
+    public void StartProduction(KeyValuePair<Receipe, GameObject> pair)
+    {
+        GameObject factory = idleFactories[pair.Key][0];
+        factory.GetComponent<FactoryItem>().StartProduction(pair);
     }
 
     // Start is called before the first frame update
@@ -52,6 +101,6 @@ public class Factory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

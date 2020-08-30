@@ -13,6 +13,11 @@ public class Player : MonoBehaviour
         SceneManager.Instance.UI.updateMoney(money);
     }
 
+    public void GainMoney(int num)
+    {
+        money += num;
+    }
+
     public bool canAfford(int cost)
     {
         return money >= cost;

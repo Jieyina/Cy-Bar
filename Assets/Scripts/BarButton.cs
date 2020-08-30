@@ -38,7 +38,7 @@ public class BarButton : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
-                    newItem.transform.parent = GameObject.Find("Bar").transform;
+                    newItem.transform.parent = SceneManager.Instance.Bar.transform;
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(cost);
                     Destroy(shadow);

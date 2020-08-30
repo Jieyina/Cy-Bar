@@ -6,23 +6,23 @@ public class Receipe
 {
     public string ReceipeName { get; }
     public int Type { get; }
-    private Dictionary<string, int> ingredients;
+    public Dictionary<string, int> Ingredients { get; }
 
     public Receipe(string str, int t)
     {
         ReceipeName = str;
         Type = t;
-        ingredients = new Dictionary<string, int>();
+        Ingredients = new Dictionary<string, int>();
     }
 
     public void AddIngredient(string str, int num)
     {
-        ingredients.Add(str,num);
+        Ingredients.Add(str,num);
     }
 
     public void PrintIngredients()
     {
-        foreach (KeyValuePair<string,int> pair in ingredients)
+        foreach (KeyValuePair<string,int> pair in Ingredients)
         {
             Debug.Log(pair.Key + " x " +pair.Value.ToString());
         }
