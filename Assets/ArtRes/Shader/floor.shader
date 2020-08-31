@@ -10,7 +10,7 @@ Shader "Custom/floor"
         _EmissionPower("Emission Power",Range(0,2)) = 1
         _Gradient("Gradient,x:slope,y:speed,zw:gradual",vector) = (-.1,5,.3,.01)
 
-        _blurSizeXY("BlurSizeXY", Range(0,20)) = 2
+        _blurSizeXY("BlurSizeXY", Range(0,10)) = 2
         
 	}
 	SubShader {
@@ -90,7 +90,7 @@ Shader "Custom/floor"
 				fixed3 diffuse = _LightColor0.rgb * color  * max(0, dot(worldNormal, worldLightDir));
 
                 float2 screenPos = i.screenPos.xy / i.screenPos.w;
-                float depth= _blurSizeXY * 0.0005;
+                float depth= _blurSizeXY * 0.0009;
 
                 screenPos.x = (screenPos.x + 1) * 0.5;
                 screenPos.y = (screenPos.y + 1) * 0.5;
@@ -130,12 +130,11 @@ Shader "Custom/floor"
 			
 			ENDCG
 		}
-
-       Pass 
+        Pass 
         {
 			Tags { "LightMode"="ForwardBase" }
             
-            cull Back
+            cull back
 			ZWrite Off
 			Blend SrcAlpha OneMinusSrcAlpha
 			
@@ -205,7 +204,7 @@ Shader "Custom/floor"
 				fixed3 diffuse = _LightColor0.rgb * color  * max(0, dot(worldNormal, worldLightDir));
 
                 float2 screenPos = i.screenPos.xy / i.screenPos.w;
-                float depth= _blurSizeXY * 0.0005;
+                float depth= _blurSizeXY * 0.0009;
 
                 screenPos.x = (screenPos.x + 1) * 0.5;
                 screenPos.y = (screenPos.y + 1) * 0.5;
@@ -245,6 +244,9 @@ Shader "Custom/floor"
 			
 			ENDCG
 		}
-    }
+        
+        
+        
+	} 
 	FallBack "Transparent/VertexLit"
 }
