@@ -63,7 +63,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionPower: 1.78
+    - _EmissionPower: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.767
     - _GlossyReflections: 1
@@ -80,7 +80,7 @@ Material:
     - _blurSizeXY: 10
     m_Colors:
     - _Color: {r: 0.27634388, g: 0.7643704, b: 0.8490566, a: 1}
-    - _EmissionColor: {r: 0.7550683, g: 0.11053756, b: 0.8679245, a: 1}
+    - _EmissionColor: {r: 0.922534, g: 0.4660377, b: 1, a: 1}
     - _Gradient: {r: 1, g: 15, b: 1, a: 0.2}
     - _OutLineColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
