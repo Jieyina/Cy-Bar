@@ -88,6 +88,7 @@ Shader "Custom/floor"
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * _Color.rgb;
                 fixed3 color = lerp(BaseColor, Emission.rgb, gradient) ;
 				fixed3 diffuse = _LightColor0.rgb * color  * max(0, dot(worldNormal, worldLightDir));
+                
 
                 float2 screenPos = i.screenPos.xy / i.screenPos.w;
                 float depth= _blurSizeXY * 0.0009;
@@ -123,9 +124,10 @@ Shader "Custom/floor"
                 sum += tex2D( _GrabTexture, screenPos+3.0 * depth) * 0.09;
                 sum += tex2D( _GrabTexture, screenPos+2.0 * depth) * 0.05;
                 sum += tex2D( _GrabTexture, screenPos+1.0 * depth) * 0.025;
+                color = diffuse + sum;
                 
 				
-				return fixed4(ambient + diffuse+sum/2, _AlphaScale);
+				return fixed4(ambient + color+sum/2, _AlphaScale);
 			}
 			
 			ENDCG
