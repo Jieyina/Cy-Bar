@@ -47,9 +47,8 @@ public class FactoryItem : MonoBehaviour
         if (producing && Time.time - startTime > produceTime)
         {
             producing = false;
-            SceneManager.Instance.Factory.FinishProduction(orderPair, gameObject);
-            //SceneManager.Instance.Bar.AddBill(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
-            SceneManager.Instance.Bar.FinishOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+            SceneManager.Instance.Factory.FinishProduction(orderPair);
+            orderPair.Value.GetComponent<Customer>().getOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
         }
     }
 }

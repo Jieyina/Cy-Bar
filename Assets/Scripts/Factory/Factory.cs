@@ -87,16 +87,21 @@ public class Factory : MonoBehaviour
         workingFacs.Add(pair,factory);
     }
 
-    public void StopProduction (KeyValuePair<Receipe, GameObject> pair)
+    public bool CheckProduction(KeyValuePair<Receipe, GameObject> pair)
+    {
+        return workingFacs.ContainsKey(pair);
+    }
+
+    public void StopProduction(KeyValuePair<Receipe, GameObject> pair)
     {
         workingFacs[pair].GetComponent<FactoryItem>().StopProduction();
         workingFacs.Remove(pair);
     }
 
-    public void FinishProduction(KeyValuePair<Receipe, GameObject> pair, GameObject fac)
+    public void FinishProduction(KeyValuePair<Receipe, GameObject> pair)
     {
+        idleFactories[pair.Key].Add(workingFacs[pair]);
         workingFacs.Remove(pair);
-        idleFactories[pair.Key].Add(fac);
     }
 
     // Start is called before the first frame update

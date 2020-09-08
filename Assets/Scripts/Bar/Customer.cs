@@ -130,9 +130,9 @@ public class Customer : MonoBehaviour
                 waiting = false;
                 timeSlider.value = 0;
                 countDownText.text = "0";
-                if (!order1.Equals(default(KeyValuePair<Receipe,GameObject>)))
+                if (waitOrder1)
                     SceneManager.Instance.Bar.RemoveOrder(order1);
-                if (!order2.Equals(default(KeyValuePair<Receipe, GameObject>)))
+                if (waitOrder2)
                     SceneManager.Instance.Bar.RemoveOrder(order2);
                 StartCoroutine(Leave());
             }

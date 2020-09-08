@@ -1626,7 +1626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerAnim: {fileID: 1817904121211742547}
-  waitTime: 10
+  waitTime: 30
   countDownText: {fileID: 4170445792425702301}
   timeSlider: {fileID: 2803173915053054934}
   moneyAnim: {fileID: 6191945684398250082}
