@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31caa197c32c4f443a379948071ce8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material1: {fileID: 2100000, guid: 0e4f5ed1b935fef4db657b34ba6331a7, type: 2}
-  material2: {fileID: 2100000, guid: 4d08b22373fec5b44891a140995a23bd, type: 2}
+  progress: {fileID: 1495201095991635755}
 --- !u!1 &5585045891849422647
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +129,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5585045891849422647}
-  m_Text: 100%
+  m_Text: 0%
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -162,7 +161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8706922259002999414
 Transform:
   m_ObjectHideFlags: 0

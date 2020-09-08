@@ -85,6 +85,7 @@ public class Customer : MonoBehaviour
 
     private IEnumerator Leave()
     {
+        timeSlider.gameObject.SetActive(false);
         leaveAnim.SetTrigger("start");
         while (!leaveAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
@@ -101,7 +102,6 @@ public class Customer : MonoBehaviour
         Receipe foodOrder = SceneManager.Instance.Factory.GetRandomFood();
         if (foodOrder != null)
         {
-            Debug.Log("ordered " + foodOrder.ReceipeName);
             order1 = new KeyValuePair<Receipe, GameObject>(foodOrder, gameObject);
             waitOrder1 = true;
             SceneManager.Instance.Bar.AddOrder(order1);
@@ -109,7 +109,6 @@ public class Customer : MonoBehaviour
         Receipe drinkOrder = SceneManager.Instance.Factory.GetRandomDrink();
         if (drinkOrder != null)
         {
-            Debug.Log("ordered " + drinkOrder.ReceipeName);
             order2 = new KeyValuePair<Receipe, GameObject>(drinkOrder, gameObject);
             waitOrder2 = true;
             SceneManager.Instance.Bar.AddOrder(order2);
@@ -136,8 +135,11 @@ public class Customer : MonoBehaviour
                     SceneManager.Instance.Bar.RemoveOrder(order2);
                 StartCoroutine(Leave());
             }
-            timeSlider.value = 1 - timePast / waitTime;
-            countDownText.text = Mathf.Ceil(waitTime - timePast).ToString();
+            else
+            {
+                timeSlider.value = 1 - timePast / waitTime;
+                countDownText.text = Mathf.Ceil(waitTime - timePast).ToString();
+            }
         }
     }
 }

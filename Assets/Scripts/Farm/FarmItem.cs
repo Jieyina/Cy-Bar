@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FarmItem : MonoBehaviour
 {
+    [SerializeField]
+    private TextMesh progress = null;
+
     private string matName;
     private int amount;
     private float produceTime;
@@ -39,6 +42,7 @@ public class FarmItem : MonoBehaviour
             SceneManager.Instance.Player.spendMoney(cost);
             Growing = true;
             startGrowTime = Time.time;
+            progress.text = "0%";
         }
     }
 
@@ -50,19 +54,26 @@ public class FarmItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Growing && Time.time - startGrowTime > produceTime)
+        if (Growing)
         {
-            Growing = false;
-            //SceneManager.Instance.Farm.AddProduct(matName,gameObject);
-            if (SceneManager.Instance.Storage.CheckCapacity())
+            float timePast = Time.time - startGrowTime;
+            if (timePast > produceTime)
             {
-                SceneManager.Instance.Storage.AddMaterial(matName, amount);
-                //Debug.Log("stored " + matName + " x " + amount);
-                RestartGrow();
+                Growing = false;
+                progress.text = "100%";
+                if (SceneManager.Instance.Storage.CheckCapacity())
+                {
+                    SceneManager.Instance.Storage.AddMaterial(matName, amount);
+                    RestartGrow();
+                }
+                else
+                {
+                    toStore = true;
+                }
             }
             else
             {
-                toStore = true;
+                progress.text = Mathf.Floor(timePast / produceTime * 100).ToString() + "%";
             }
         }
 
@@ -71,7 +82,6 @@ public class FarmItem : MonoBehaviour
             if (SceneManager.Instance.Storage.CheckCapacity())
             {
                 SceneManager.Instance.Storage.AddMaterial(matName, amount);
-                //Debug.Log("stored " + matName + " x " + amount);
                 RestartGrow();
                 toStore = false;
             }
