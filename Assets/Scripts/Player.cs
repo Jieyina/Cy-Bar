@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int initMoney;
+    [SerializeField]
+    public int initMoney = 0;
     private int money;
 
     public void spendMoney(int cost)
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public void GainMoney(int num)
     {
         money += num;
+        SceneManager.Instance.UI.updateMoney(money);
     }
 
     public bool canAfford(int cost)
