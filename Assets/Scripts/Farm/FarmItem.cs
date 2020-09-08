@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class FarmItem : MonoBehaviour
 {
-    [SerializeField]
-    private Material material1;
-    [SerializeField]
-    private Material material2;
-
     private string matName;
     private int amount;
     private float produceTime;
@@ -42,7 +37,6 @@ public class FarmItem : MonoBehaviour
         if (SceneManager.Instance.Player.canAfford(cost))
         {
             SceneManager.Instance.Player.spendMoney(cost);
-            transform.Find("model").gameObject.GetComponent<Renderer>().material = material1;
             Growing = true;
             startGrowTime = Time.time;
         }
@@ -58,13 +52,12 @@ public class FarmItem : MonoBehaviour
     {
         if (Growing && Time.time - startGrowTime > produceTime)
         {
-            transform.Find("model").gameObject.GetComponent<Renderer>().material = material2;
             Growing = false;
             //SceneManager.Instance.Farm.AddProduct(matName,gameObject);
             if (SceneManager.Instance.Storage.CheckCapacity())
             {
                 SceneManager.Instance.Storage.AddMaterial(matName, amount);
-                Debug.Log("stored " + matName + " x " + amount);
+                //Debug.Log("stored " + matName + " x " + amount);
                 RestartGrow();
             }
             else
@@ -78,7 +71,7 @@ public class FarmItem : MonoBehaviour
             if (SceneManager.Instance.Storage.CheckCapacity())
             {
                 SceneManager.Instance.Storage.AddMaterial(matName, amount);
-                Debug.Log("stored " + matName + " x " + amount);
+                //Debug.Log("stored " + matName + " x " + amount);
                 RestartGrow();
                 toStore = false;
             }

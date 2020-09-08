@@ -5,11 +5,11 @@ using UnityEngine;
 public class BarButton : MonoBehaviour
 {
     [SerializeField]
-    private int cost;
+    private int cost = 5;
     [SerializeField]
-    private GameObject shadePrefab;
+    private GameObject shadePrefab = null;
     [SerializeField]
-    private GameObject item;
+    private GameObject item = null;
 
     private GameObject shadow;
     private RaycastHit hit;
@@ -41,7 +41,7 @@ public class BarButton : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
-                    newItem.transform.parent = SceneManager.Instance.Bar.transform;
+                    newItem.transform.parent = hit.transform.parent.parent;
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(cost);
                     Destroy(shadow);

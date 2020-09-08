@@ -6,34 +6,35 @@ public class Bar : MonoBehaviour
 {
     private List<KeyValuePair<Receipe, GameObject>> orderedDish = new List<KeyValuePair<Receipe, GameObject>>();
     private Dictionary<GameObject, List<Receipe>> orders = new Dictionary<GameObject, List<Receipe>>();
-    private Dictionary<GameObject, int> bills = new Dictionary<GameObject, int>();
 
-    public void AddOrder(Receipe rec, GameObject table)
+    public void AddOrder(KeyValuePair<Receipe, GameObject> pair)
     {
-        orderedDish.Add(new KeyValuePair<Receipe, GameObject>(rec, table));
-        if (!orders.ContainsKey(table))
-            orders.Add(table, new List<Receipe>());
-        orders[table].Add(rec);
+        orderedDish.Add(pair);
+        if (!orders.ContainsKey(pair.Value))
+            orders.Add(pair.Value, new List<Receipe>());
+        orders[pair.Value].Add(pair.Key);
     }
 
-    public void FinishOrder(KeyValuePair<Receipe, GameObject> pair)
+    public void RemoveOrder(KeyValuePair<Receipe, GameObject> pair)
     {
+        SceneManager.Instance.Factory.StopProduction(pair);
         orderedDish.Remove(pair);
         orders[pair.Value].Remove(pair.Key);
         if (orders[pair.Value].Count == 0)
         {
             orders.Remove(pair.Value);
-            SceneManager.Instance.Player.GainMoney(bills[pair.Value]);
-            pair.Value.GetComponent<BarTable>().EmptyTable();
         }
     }
 
-    public void AddBill(KeyValuePair<Receipe, GameObject> pair, int amount)
+    public void FinishOrder(KeyValuePair<Receipe, GameObject> pair, int bill)
     {
-        if (!bills.ContainsKey(pair.Value))
-            bills.Add(pair.Value, amount);
-        else
-            bills[pair.Value] += amount;
+        orderedDish.Remove(pair);
+        orders[pair.Value].Remove(pair.Key);
+        pair.Value.GetComponent<Customer>().getOrder(pair, bill);
+        if (orders[pair.Value].Count == 0)
+        {
+            orders.Remove(pair.Value);
+        }
     }
 
     private void CheckOrderCompletion()

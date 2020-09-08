@@ -5,20 +5,19 @@ using UnityEngine;
 public class BarTable : MonoBehaviour
 {
     [SerializeField]
-    private float maxEmptyTime;
+    private float maxEmptyTime= 5f;
     [SerializeField]
-    private GameObject customerPrefab;
+    private GameObject customerPrefab = null;
 
     private bool empty;
     private float interval;
     private float startTime;
-    private GameObject customer;
 
     // Start is called before the first frame update
     void Start()
     {
         empty = true;
-        interval = Random.Range(1f, maxEmptyTime);
+        interval = Random.Range(1.2f, maxEmptyTime);
         startTime = Time.time;
     }
 
@@ -28,27 +27,15 @@ public class BarTable : MonoBehaviour
         if (empty && Time.time - startTime > interval)
         {
             empty = false;
-            customer = Instantiate(customerPrefab, transform.Find("spawnPoint"));
-            Receipe foodOrder = SceneManager.Instance.Factory.GetRandomFood();
-            if (foodOrder != null)
-            {
-                Debug.Log("ordered " + foodOrder.ReceipeName);
-                SceneManager.Instance.Bar.AddOrder(foodOrder, gameObject);
-            }
-            Receipe drinkOrder = SceneManager.Instance.Factory.GetRandomDrink();
-            if (drinkOrder != null)
-            {
-                SceneManager.Instance.Bar.AddOrder(drinkOrder, gameObject);
-            }
+            GameObject customer = Instantiate(customerPrefab, transform.Find("spawnPoint"));
+            customer.GetComponent<Customer>().Table = gameObject;
         }
     }
 
     public void EmptyTable()
     {
-        Destroy(customer);
-        customer = null;
         empty = true;
-        interval = Random.Range(1f, maxEmptyTime);
+        interval = Random.Range(1.2f, maxEmptyTime);
         startTime = Time.time;
     }
 }

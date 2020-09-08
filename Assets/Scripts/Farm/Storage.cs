@@ -45,7 +45,7 @@ public class Storage : MonoBehaviour
         foreach (var pair in rec.Ingredients)
         {
             rawMat[pair.Key] -= pair.Value;
-            Debug.Log("consumed " + pair.Key + " x " + pair.Value);
+            //Debug.Log("consumed " + pair.Key + " x " + pair.Value);
             stored -= pair.Value;
         }
     }

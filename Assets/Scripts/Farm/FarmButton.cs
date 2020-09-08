@@ -5,19 +5,19 @@ using UnityEngine;
 public class FarmButton : MonoBehaviour
 {
     [SerializeField]
-    private string matName;
+    private string matName = null;
     [SerializeField]
-    private int produceNum;
+    private int produceNum = 1;
     [SerializeField]
-    private float growTime;
+    private float growTime = 5f;
     [SerializeField]
-    private int authorizationCost;
+    private int authorizationCost = 5;
     [SerializeField]
-    private int activationCost;
+    private int activationCost = 5;
     [SerializeField]
-    private GameObject shadePrefab;
+    private GameObject shadePrefab = null;
     [SerializeField]
-    private GameObject item;
+    private GameObject item = null;
 
     private GameObject shadow;
     private RaycastHit hit;
@@ -49,7 +49,7 @@ public class FarmButton : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
-                    newItem.transform.parent = GameObject.Find("Farm").transform;
+                    newItem.transform.parent = hit.transform.parent.parent;
                     newItem.GetComponent<FarmItem>().SetProps(matName, produceNum, growTime, activationCost);
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(authorizationCost);

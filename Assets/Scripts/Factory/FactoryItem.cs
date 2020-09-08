@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class FactoryItem : MonoBehaviour
 {
-    [SerializeField]
-    private Material material1;
-    [SerializeField]
-    private Material material2;
-
     private static Receipe receipe;
     private float produceTime;
     private int profit;
@@ -27,12 +22,17 @@ public class FactoryItem : MonoBehaviour
 
     public void StartProduction(KeyValuePair<Receipe, GameObject> pair)
     {
-        transform.Find("model").gameObject.GetComponent<Renderer>().material = material1;
         producing = true;
         startTime = Time.time;
         orderPair = pair;
         Debug.Log("start produce" + pair.Key.ReceipeName);
-        SceneManager.Instance.Factory.RemoveFactory(receipe, gameObject);
+    }
+
+    public void StopProduction()
+    {
+        Debug.Log("stop produce" + orderPair.Key.ReceipeName);
+        producing = false;
+        SceneManager.Instance.Factory.AddFactory(receipe, gameObject);
     }
 
     // Start is called before the first frame update
@@ -46,11 +46,10 @@ public class FactoryItem : MonoBehaviour
     {
         if (producing && Time.time - startTime > produceTime)
         {
-            transform.Find("model").gameObject.GetComponent<Renderer>().material = material2;
             producing = false;
-            SceneManager.Instance.Bar.AddBill(orderPair,(int)(profit*(1-chargeRate)+0.5f));
-            SceneManager.Instance.Bar.FinishOrder(orderPair);
-            SceneManager.Instance.Factory.AddFactory(receipe, gameObject);
+            SceneManager.Instance.Factory.FinishProduction(orderPair, gameObject);
+            //SceneManager.Instance.Bar.AddBill(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+            SceneManager.Instance.Bar.FinishOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
         }
     }
 }
