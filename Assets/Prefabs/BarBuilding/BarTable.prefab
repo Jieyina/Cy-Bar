@@ -175,6 +175,7 @@ MonoBehaviour:
   customerPrefab:
   - {fileID: 2803173915230037861, guid: d288c5b4272c85944850ffe08236c9ac, type: 3}
   - {fileID: 2803173915230037861, guid: 7f51988e5a29d6a428873161eeb766b1, type: 3}
+  - {fileID: 2803173915230037861, guid: dce2b730f1e9c5d4a9ad4220befb0e0b, type: 3}
 --- !u!1 &6678091085117308356
 GameObject:
   m_ObjectHideFlags: 0
