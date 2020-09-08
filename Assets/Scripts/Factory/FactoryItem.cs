@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FactoryItem : MonoBehaviour
 {
+    [SerializeField]
+    private TextMesh progress = null;
+
     private static Receipe receipe;
     private float produceTime;
     private int profit;
@@ -25,7 +28,7 @@ public class FactoryItem : MonoBehaviour
         producing = true;
         startTime = Time.time;
         orderPair = pair;
-        Debug.Log("start produce" + pair.Key.ReceipeName);
+        progress.text = "0%";
     }
 
     public void StopProduction()
@@ -35,6 +38,11 @@ public class FactoryItem : MonoBehaviour
         SceneManager.Instance.Factory.AddFactory(receipe, gameObject);
     }
 
+    private IEnumerator clearProgress()
+    {
+        yield return new WaitForSeconds(0.5f);
+        progress.text = "0%";
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -44,11 +52,19 @@ public class FactoryItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (producing && Time.time - startTime > produceTime)
+        if (producing)
         {
-            producing = false;
-            SceneManager.Instance.Factory.FinishProduction(orderPair);
-            orderPair.Value.GetComponent<Customer>().getOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+            float timePast = Time.time - startTime;
+            if (timePast > produceTime)
+            {
+                producing = false;
+                progress.text = "100%";
+                StartCoroutine(clearProgress());
+                SceneManager.Instance.Factory.FinishProduction(orderPair);
+                orderPair.Value.GetComponent<Customer>().getOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+            }
+            else
+                progress.text = Mathf.Ceil(timePast / produceTime * 100).ToString() + "%";
         }
     }
 }
