@@ -62,7 +62,7 @@ public class Customer : MonoBehaviour
 
     private IEnumerator finishOrder()
     {
-        Debug.Log("eat");
+        timeSlider.gameObject.SetActive(false);
         foodLeft.SetActive(true);
         customerAnim.SetTrigger("eat");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("eat"))

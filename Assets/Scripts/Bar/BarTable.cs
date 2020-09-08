@@ -7,7 +7,7 @@ public class BarTable : MonoBehaviour
     [SerializeField]
     private float maxEmptyTime= 5f;
     [SerializeField]
-    private GameObject customerPrefab = null;
+    private List<GameObject> customerPrefab = null;
 
     private bool empty;
     private float interval;
@@ -27,7 +27,8 @@ public class BarTable : MonoBehaviour
         if (empty && Time.time - startTime > interval)
         {
             empty = false;
-            GameObject customer = Instantiate(customerPrefab, transform.Find("spawnPoint"));
+            int i = Random.Range(0, customerPrefab.Count);
+            GameObject customer = Instantiate(customerPrefab[i], transform.Find("spawnPoint"));
             customer.GetComponent<Customer>().Table = gameObject;
         }
     }
