@@ -14646,6 +14646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyText: {fileID: 334895718}
+  starText: {fileID: 171816044}
 --- !u!1 &1453342513
 GameObject:
   m_ObjectHideFlags: 0

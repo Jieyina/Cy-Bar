@@ -5,11 +5,19 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Text moneyText;
+    [SerializeField]
+    private Text moneyText = null;
+    [SerializeField]
+    private Text starText = null;
 
     public void updateMoney(int num)
     {
         moneyText.text = num.ToString();
+    }
+
+    public void updateStar(int num)
+    {
+        starText.text = num.ToString();
     }
 
     // Start is called before the first frame update

@@ -10,7 +10,7 @@ public class FactoryItem : MonoBehaviour
     private static Receipe receipe;
     private float produceTime;
     private int profit;
-    private float chargeRate = 0.4f;
+    private static float chargeRate = 0.4f;
 
     private bool producing = false;
     private float startTime;
@@ -33,8 +33,8 @@ public class FactoryItem : MonoBehaviour
 
     public void StopProduction()
     {
-        Debug.Log("stop produce" + orderPair.Key.ReceipeName);
         producing = false;
+        progress.text = "0%";
         SceneManager.Instance.Factory.AddFactory(receipe, gameObject);
     }
 
@@ -64,7 +64,7 @@ public class FactoryItem : MonoBehaviour
                 orderPair.Value.GetComponent<Customer>().getOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
             }
             else
-                progress.text = Mathf.Ceil(timePast / produceTime * 100).ToString() + "%";
+                progress.text = Mathf.Floor(timePast / produceTime * 100).ToString() + "%";
         }
     }
 }

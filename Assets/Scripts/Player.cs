@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     public int initMoney = 0;
     private int money;
+    private int star;
 
     public void spendMoney(int cost)
     {
@@ -20,6 +21,12 @@ public class Player : MonoBehaviour
         SceneManager.Instance.UI.updateMoney(money);
     }
 
+    public void GainStar(int num)
+    {
+        star += num;
+        SceneManager.Instance.UI.updateStar(star);
+    }
+
     public bool canAfford(int cost)
     {
         return money >= cost;
@@ -29,6 +36,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         money = initMoney;
+        star = 0;
+        SceneManager.Instance.UI.updateMoney(money);
     }
 
     // Update is called once per frame

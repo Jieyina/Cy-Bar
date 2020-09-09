@@ -17,7 +17,11 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private Animator moneyAnim = null;
     [SerializeField]
-    private Text MoneyText = null;
+    private Text moneyText = null;
+    [SerializeField]
+    private Animator starAnim = null;
+    [SerializeField]
+    private Text starText = null;
     [SerializeField]
     private Animator leaveAnim = null;
     [SerializeField]
@@ -30,6 +34,7 @@ public class Customer : MonoBehaviour
 
     private bool waiting;
     private float startWaitTime;
+    private float waitedTime;
     private KeyValuePair<Receipe, GameObject> order1;
     private KeyValuePair<Receipe, GameObject> order2;
     private bool waitOrder1 = false;
@@ -45,6 +50,7 @@ public class Customer : MonoBehaviour
         if (!waitOrder1 && !waitOrder2)
         {
             waiting = false;
+            waitedTime = Time.time - startWaitTime;
             StartCoroutine(finishOrder());
         }
         else
@@ -55,6 +61,8 @@ public class Customer : MonoBehaviour
     {
         foodLeft.SetActive(true);
         customerAnim.SetTrigger("eat");
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("eat"))
+            yield return null;
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
         foodLeft.SetActive(false);
@@ -70,12 +78,16 @@ public class Customer : MonoBehaviour
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
         foodLeft.SetActive(false);
-        Debug.Log("pay");
-        MoneyText.text = "+ " + payment.ToString();
+        int rating = (int)Mathf.Floor(5 * (1 - waitedTime / waitTime)) + 1;
+        if (rating == 6) rating = 5;
+        starText.text = "+ " + rating.ToString();
+        moneyText.text = "+ " + payment.ToString();
         moneyAnim.SetTrigger("start");
+        starAnim.SetTrigger("start");
         while (!moneyAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
         SceneManager.Instance.Player.GainMoney(payment);
+        SceneManager.Instance.Player.GainStar(rating);
         customerAnim.SetTrigger("leave");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
@@ -88,6 +100,18 @@ public class Customer : MonoBehaviour
         timeSlider.gameObject.SetActive(false);
         leaveAnim.SetTrigger("start");
         while (!leaveAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            yield return null;
+        customerAnim.SetTrigger("leave");
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            yield return null;
+        table.GetComponent<BarTable>().EmptyTable();
+        Destroy(gameObject);
+    }
+
+    private IEnumerator NoOrderLeave()
+    {
+        timeSlider.gameObject.SetActive(false);
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
         customerAnim.SetTrigger("leave");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
@@ -112,6 +136,11 @@ public class Customer : MonoBehaviour
             order2 = new KeyValuePair<Receipe, GameObject>(drinkOrder, gameObject);
             waitOrder2 = true;
             SceneManager.Instance.Bar.AddOrder(order2);
+        }
+        if (foodOrder==null&&drinkOrder==null)
+        {
+            StartCoroutine(NoOrderLeave());
+            return;
         }
         waiting = true;
         startWaitTime = Time.time;
