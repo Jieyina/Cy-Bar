@@ -731,7 +731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688837041567746741, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: m_Text
-      value: Rice Date Slot
+      value: Rice Data Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5585881043217040009, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: matName
@@ -23711,7 +23711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688837041567746741, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: m_Text
-      value: Lemon Date Slot
+      value: Lemon Data Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5585881043217040009, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: matName
