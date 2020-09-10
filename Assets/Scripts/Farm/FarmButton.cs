@@ -53,8 +53,6 @@ public class FarmButton : MonoBehaviour
                     newItem.GetComponent<FarmItem>().SetProps(matName, produceNum, growTime, activationCost);
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(authorizationCost);
-                    Destroy(shadow);
-                    shadow = null;
                 }
             }
             else

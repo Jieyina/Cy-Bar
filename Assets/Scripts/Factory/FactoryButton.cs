@@ -100,8 +100,6 @@ public class FactoryButton : MonoBehaviour
                     newItem.GetComponent<FactoryItem>().SetReceipe(rec,produceTime,price);
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(buildCost);
-                    Destroy(shadow);
-                    shadow = null;
                 }
             }
             else

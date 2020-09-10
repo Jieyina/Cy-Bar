@@ -44,8 +44,6 @@ public class BarButton : MonoBehaviour
                     newItem.transform.parent = hit.transform.parent.parent;
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(cost);
-                    Destroy(shadow);
-                    shadow = null;
                 }
             }
             else
