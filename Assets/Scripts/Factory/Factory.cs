@@ -41,14 +41,12 @@ public class Factory : MonoBehaviour
     public void AddFood(Receipe rec)
     {
         //Debug.Log("new food " + rec.ReceipeName);
-        //rec.PrintIngredients();
         food.Add(rec);
     }
 
     public void AddDrink(Receipe rec)
     {
         //Debug.Log("new drink " + rec.ReceipeName);
-        //rec.PrintIngredients();
         drink.Add(rec);
     }
 
@@ -56,7 +54,7 @@ public class Factory : MonoBehaviour
     {
         if (food.Count != 0)
         {
-            int index = Random.Range(0, food.Count - 1);
+            int index = Random.Range(0, food.Count);
             return food[index];
         }
         else
@@ -67,7 +65,7 @@ public class Factory : MonoBehaviour
     {
         if (drink.Count != 0)
         {
-            int index = Random.Range(0, drink.Count - 1);
+            int index = Random.Range(0, drink.Count);
             return drink[index];
         }
         else

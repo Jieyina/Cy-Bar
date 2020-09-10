@@ -8,6 +8,8 @@ public class Storage : MonoBehaviour
     [SerializeField]
     private int initCapacity = 16;
     [SerializeField]
+    private Text capText = null;
+    [SerializeField]
     private Transform storageUI = null;
 
     private int capacity;
@@ -46,6 +48,7 @@ public class Storage : MonoBehaviour
     public void ChangeCapacity(int newCap)
     {
         capacity = newCap;
+        capText.text = capacity.ToString();
     }
 
     public void ConsumeMaterial(Receipe rec)
@@ -62,6 +65,7 @@ public class Storage : MonoBehaviour
     void Start()
     {
         capacity = initCapacity;
+        capText.text = capacity.ToString();
     }
 
     // Update is called once per frame
