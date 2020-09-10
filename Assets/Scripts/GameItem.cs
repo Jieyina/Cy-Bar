@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GameItem : MonoBehaviour
 {
-    protected int playSpeed = 1;
+    protected static int playSpeed = 1;
     private Animator[] animators;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         animators = GetComponentsInChildren<Animator>();
-        Debug.Log(animators.Length);
+        SetAnimSpeed();
     }
 
     // Update is called once per frame
@@ -20,33 +20,17 @@ public class GameItem : MonoBehaviour
         
     }
 
-    public void SpeedUp()
+    public static void SetPlaySpeed(int newSpeed)
     {
-        playSpeed = 2;
-        if (animators.Length != 0)
-        {
-            foreach (Animator anim in animators)
-                anim.speed = 2;
-        }
+        playSpeed = newSpeed;
     }
 
-    public void RestoreSpeed()
+    public void SetAnimSpeed()
     {
-        playSpeed = 1;
         if (animators.Length != 0)
         {
             foreach (Animator anim in animators)
-                anim.speed = 1;
-        }
-    }
-
-    public void Pause()
-    {
-        playSpeed = 0;
-        if (animators.Length != 0)
-        {
-            foreach (Animator anim in animators)
-                anim.speed = 0;
+                anim.speed = playSpeed;
         }
     }
 }

@@ -23,31 +23,34 @@ public class SceneManager : MonoBehaviour
 
     public void SpeedUp()
     {
+        GameItem.SetPlaySpeed(2);
         GameItem[] items = FindObjectsOfType<GameItem>();
         if (items.Length != 0)
         {
             foreach (var item in items)
-                item.SpeedUp();
+                item.SetAnimSpeed();
         }
     }
 
     public void RestoreSpeed()
     {
+        GameItem.SetPlaySpeed(1);
         GameItem[] items = FindObjectsOfType<GameItem>();
         if (items.Length != 0)
         {
             foreach (var item in items)
-                item.RestoreSpeed();
+                item.SetAnimSpeed();
         }
     }
 
     public void Pause()
     {
+        GameItem.SetPlaySpeed(0);
         GameItem[] items = FindObjectsOfType<GameItem>();
         if (items.Length != 0)
         {
             foreach (var item in items)
-                item.Pause();
+                item.SetAnimSpeed();
         }
     }
 

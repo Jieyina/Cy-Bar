@@ -7,7 +7,7 @@ public class FactoryItem : GameItem
     [SerializeField]
     private TextMesh progress = null;
 
-    private static Receipe receipe;
+    private Receipe receipe;
     private float produceTime;
     private int profit;
     private static float chargeRate = 0.4f;
