@@ -10,12 +10,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text starText = null;
 
-    public void updateMoney(int num)
+    public void UpdateMoney(int num)
     {
         moneyText.text = num.ToString();
     }
 
-    public void updateStar(int num)
+    public void UpdateStar(int num)
     {
         starText.text = num.ToString();
     }

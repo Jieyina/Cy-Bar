@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmItem : MonoBehaviour
+public class FarmItem : GameItem
 {
     [SerializeField]
     private TextMesh progress = null;
@@ -13,7 +13,7 @@ public class FarmItem : MonoBehaviour
     private int cost;
 
     private bool Growing;
-    private float startGrowTime;
+    private float remainTime;
     private bool toStore;
 
     public void SetProps(string str, int num, float time, int price)
@@ -25,13 +25,14 @@ public class FarmItem : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         if (SceneManager.Instance.Player.canAfford(cost))
         {
             SceneManager.Instance.Player.spendMoney(cost);
             Growing = true;
-            startGrowTime = Time.time;
+            remainTime = produceTime;
         }
     }
 
@@ -41,7 +42,7 @@ public class FarmItem : MonoBehaviour
         {
             SceneManager.Instance.Player.spendMoney(cost);
             Growing = true;
-            startGrowTime = Time.time;
+            remainTime = produceTime;
             progress.text = "0%";
         }
     }
@@ -56,8 +57,8 @@ public class FarmItem : MonoBehaviour
     {
         if (Growing)
         {
-            float timePast = Time.time - startGrowTime;
-            if (timePast > produceTime)
+            remainTime -= playSpeed * Time.deltaTime;
+            if (remainTime < 0)
             {
                 Growing = false;
                 progress.text = "100%";
@@ -73,7 +74,7 @@ public class FarmItem : MonoBehaviour
             }
             else
             {
-                progress.text = Mathf.Floor(timePast / produceTime * 100).ToString() + "%";
+                progress.text = Mathf.Floor((produceTime - remainTime) / produceTime * 100).ToString() + "%";
             }
         }
 

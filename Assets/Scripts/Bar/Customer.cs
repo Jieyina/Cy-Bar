@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Customer : MonoBehaviour
+public class Customer : GameItem
 {
     [SerializeField]
     private Animator customerAnim = null;
@@ -33,15 +33,14 @@ public class Customer : MonoBehaviour
     public GameObject Table { set { table = value; } }
 
     private bool waiting;
-    private float startWaitTime;
-    private float waitedTime;
+    private float remainTime;
     private KeyValuePair<Receipe, GameObject> order1;
     private KeyValuePair<Receipe, GameObject> order2;
     private bool waitOrder1 = false;
     private bool waitOrder2 = false;
     private int payment = 0;
 
-    public void getOrder(KeyValuePair<Receipe, GameObject> order, int bill)
+    public void GetOrder(KeyValuePair<Receipe, GameObject> order, int bill)
     {
         if (order.Key.ReceipeName == order1.Key.ReceipeName)
             waitOrder1 = false;
@@ -50,14 +49,13 @@ public class Customer : MonoBehaviour
         if (!waitOrder1 && !waitOrder2)
         {
             waiting = false;
-            waitedTime = Time.time - startWaitTime;
-            StartCoroutine(finishOrder());
+            StartCoroutine(FinishOrder());
         }
         else
-            StartCoroutine(startEat());
+            StartCoroutine(StartEat());
     }
 
-    private IEnumerator startEat()
+    private IEnumerator StartEat()
     {
         foodLeft.SetActive(true);
         customerAnim.SetTrigger("eat");
@@ -68,7 +66,7 @@ public class Customer : MonoBehaviour
         foodLeft.SetActive(false);
     }
 
-    private IEnumerator finishOrder()
+    private IEnumerator FinishOrder()
     {
         timeSlider.gameObject.SetActive(false);
         foodLeft.SetActive(true);
@@ -78,7 +76,7 @@ public class Customer : MonoBehaviour
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
         foodLeft.SetActive(false);
-        int rating = (int)Mathf.Floor(5 * (1 - waitedTime / waitTime)) + 1;
+        int rating = (int)Mathf.Floor(remainTime / waitTime * 5) + 1;
         if (rating == 6) rating = 5;
         starText.text = "+ " + rating.ToString();
         moneyText.text = "+ " + payment.ToString();
@@ -121,8 +119,9 @@ public class Customer : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         Receipe foodOrder = SceneManager.Instance.Factory.GetRandomFood();
         if (foodOrder != null)
         {
@@ -143,8 +142,8 @@ public class Customer : MonoBehaviour
             return;
         }
         waiting = true;
-        startWaitTime = Time.time;
-        countDownText.text = ((int)waitTime).ToString();
+        remainTime = waitTime;
+        countDownText.text = ((int)remainTime).ToString();
     }
 
     // Update is called once per frame
@@ -152,8 +151,8 @@ public class Customer : MonoBehaviour
     {
         if (waiting)
         {
-            float timePast = Time.time - startWaitTime;
-            if (timePast > waitTime)
+            remainTime -= playSpeed * Time.deltaTime;
+            if (remainTime < 0)
             {
                 waiting = false;
                 timeSlider.value = 0;
@@ -166,8 +165,8 @@ public class Customer : MonoBehaviour
             }
             else
             {
-                timeSlider.value = 1 - timePast / waitTime;
-                countDownText.text = Mathf.Ceil(waitTime - timePast).ToString();
+                timeSlider.value = remainTime / waitTime;
+                countDownText.text = Mathf.Ceil(remainTime).ToString();
             }
         }
     }

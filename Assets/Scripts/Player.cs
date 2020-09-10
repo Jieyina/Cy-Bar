@@ -12,19 +12,19 @@ public class Player : MonoBehaviour
     public void spendMoney(int cost)
     {
         money -= cost;
-        SceneManager.Instance.UI.updateMoney(money);
+        SceneManager.Instance.UI.UpdateMoney(money);
     }
 
     public void GainMoney(int num)
     {
         money += num;
-        SceneManager.Instance.UI.updateMoney(money);
+        SceneManager.Instance.UI.UpdateMoney(money);
     }
 
     public void GainStar(int num)
     {
         star += num;
-        SceneManager.Instance.UI.updateStar(star);
+        SceneManager.Instance.UI.UpdateStar(star);
     }
 
     public bool canAfford(int cost)
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     {
         money = initMoney;
         star = 0;
-        SceneManager.Instance.UI.updateMoney(money);
+        SceneManager.Instance.UI.UpdateMoney(money);
     }
 
     // Update is called once per frame

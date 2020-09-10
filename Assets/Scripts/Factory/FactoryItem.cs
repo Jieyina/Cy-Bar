@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FactoryItem : MonoBehaviour
+public class FactoryItem : GameItem
 {
     [SerializeField]
     private TextMesh progress = null;
@@ -13,7 +13,7 @@ public class FactoryItem : MonoBehaviour
     private static float chargeRate = 0.4f;
 
     private bool producing = false;
-    private float startTime;
+    private float remainTime;
     private KeyValuePair<Receipe, GameObject> orderPair;
 
     public void SetReceipe(Receipe rec, float time, int prof)
@@ -26,7 +26,7 @@ public class FactoryItem : MonoBehaviour
     public void StartProduction(KeyValuePair<Receipe, GameObject> pair)
     {
         producing = true;
-        startTime = Time.time;
+        remainTime = produceTime;
         orderPair = pair;
         progress.text = "0%";
     }
@@ -43,9 +43,11 @@ public class FactoryItem : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         progress.text = "0%";
     }
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         SceneManager.Instance.Factory.AddFactory(receipe,gameObject);
     }
 
@@ -54,17 +56,17 @@ public class FactoryItem : MonoBehaviour
     {
         if (producing)
         {
-            float timePast = Time.time - startTime;
-            if (timePast > produceTime)
+            remainTime -= playSpeed * Time.deltaTime;
+            if (remainTime < 0)
             {
                 producing = false;
                 progress.text = "100%";
                 StartCoroutine(clearProgress());
                 SceneManager.Instance.Factory.FinishProduction(orderPair);
-                orderPair.Value.GetComponent<Customer>().getOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+                orderPair.Value.GetComponent<Customer>().GetOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
             }
             else
-                progress.text = Mathf.Floor(timePast / produceTime * 100).ToString() + "%";
+                progress.text = Mathf.Floor((produceTime - remainTime) / produceTime * 100).ToString() + "%";
         }
     }
 }

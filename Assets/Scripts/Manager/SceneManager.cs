@@ -21,6 +21,36 @@ public class SceneManager : MonoBehaviour
         Bar = FindObjectOfType<Bar>();
     }
 
+    public void SpeedUp()
+    {
+        GameItem[] items = FindObjectsOfType<GameItem>();
+        if (items.Length != 0)
+        {
+            foreach (var item in items)
+                item.SpeedUp();
+        }
+    }
+
+    public void RestoreSpeed()
+    {
+        GameItem[] items = FindObjectsOfType<GameItem>();
+        if (items.Length != 0)
+        {
+            foreach (var item in items)
+                item.RestoreSpeed();
+        }
+    }
+
+    public void Pause()
+    {
+        GameItem[] items = FindObjectsOfType<GameItem>();
+        if (items.Length != 0)
+        {
+            foreach (var item in items)
+                item.Pause();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
