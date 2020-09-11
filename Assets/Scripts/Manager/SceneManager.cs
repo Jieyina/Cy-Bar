@@ -12,9 +12,6 @@ public class SceneManager : MonoBehaviour
     public Bar Bar { get; private set; }
     public static SceneManager Instance { get; private set; }
 
-    private bool destroy = false;
-    private RaycastHit hit;
-
     void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -26,62 +23,6 @@ public class SceneManager : MonoBehaviour
         Bar = FindObjectOfType<Bar>();
     }
 
-    public void SpeedUp()
-    {
-        GameItem.SetPlaySpeed(2);
-        //GameItem[] items = FindObjectsOfType<GameItem>();
-        //if (items.Length != 0)
-        //{
-        //    foreach (var item in items)
-        //        item.SetAnimSpeed();
-        //}
-        Animator[] anims = FindObjectsOfType<Animator>();
-        if (anims.Length != 0)
-        {
-            foreach (var anim in anims)
-                anim.speed = 2;
-        }
-    }
-
-    public void RestoreSpeed()
-    {
-        GameItem.SetPlaySpeed(1);
-        //GameItem[] items = FindObjectsOfType<GameItem>();
-        //if (items.Length != 0)
-        //{
-        //    foreach (var item in items)
-        //        item.SetAnimSpeed();
-        //}
-        Animator[] anims = FindObjectsOfType<Animator>();
-        if (anims.Length != 0)
-        {
-            foreach (var anim in anims)
-                anim.speed = 1;
-        }
-    }
-
-    public void Pause()
-    {
-        GameItem.SetPlaySpeed(0);
-        //GameItem[] items = FindObjectsOfType<GameItem>();
-        //if (items.Length != 0)
-        //{
-        //    foreach (var item in items)
-        //        item.SetAnimSpeed();
-        //}
-        Animator[] anims = FindObjectsOfType<Animator>();
-        if (anims.Length != 0)
-        {
-            foreach (var anim in anims)
-                anim.speed = 0;
-        }
-    }
-
-    public void DestroyItem()
-    {
-        destroy = true;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -91,16 +32,6 @@ public class SceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (destroy)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50000f, 1<<11))
-                {
-                    hit.transform.parent.gameObject.GetComponent<GameItem>().DestroyItem();
-                }
-                destroy = false;
-            }
-        }
+
     }
 }

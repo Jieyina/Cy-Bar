@@ -578,7 +578,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5585881043217040009}
         m_TargetAssemblyTypeName: FarmButton, Assembly-CSharp
-        m_MethodName: createSeed
+        m_MethodName: CreateSeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

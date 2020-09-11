@@ -38,10 +38,11 @@ public class BarButton : MonoBehaviour
             {
                 shadow.transform.Find("highlight").gameObject.SetActive(true);
                 shadow.transform.position = hit.transform.position;
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && SceneManager.Instance.Player.canAfford(cost))
                 {
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
-                    newItem.transform.parent = hit.transform.parent.parent;
+                    newItem.transform.parent = hit.transform;
+                    newItem.GetComponent<BarTable>().SetCost(cost);
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(cost);
                 }
@@ -58,7 +59,7 @@ public class BarButton : MonoBehaviour
 
     public void CreateItem()
     {
-        if (!shadow && SceneManager.Instance.Player.canAfford(cost))
+        if (!shadow)
         {
             shadow = Instantiate(shadePrefab);
         }

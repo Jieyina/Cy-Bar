@@ -62,7 +62,7 @@ public class FactoryButton : MonoBehaviour
 
     public void BuildFactory()
     {
-        if (!shadow && SceneManager.Instance.Player.canAfford(buildCost))
+        if (!shadow)
         {
             shadow = Instantiate(shadePrefab);
         }
@@ -92,12 +92,12 @@ public class FactoryButton : MonoBehaviour
             {
                 shadow.transform.Find("highlight").gameObject.SetActive(true);
                 shadow.transform.position = hit.transform.position;
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && SceneManager.Instance.Player.canAfford(buildCost))
                 {
                     Receipe rec = CreateReceipe();
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
-                    newItem.transform.parent = hit.transform.parent.parent;
-                    newItem.GetComponent<FactoryItem>().SetReceipe(rec,produceTime,price);
+                    newItem.transform.parent = hit.transform;
+                    newItem.GetComponent<FactoryItem>().SetReceipe(rec,produceTime,price,buildCost);
                     hit.transform.gameObject.layer = 0;
                     SceneManager.Instance.Player.spendMoney(buildCost);
                 }

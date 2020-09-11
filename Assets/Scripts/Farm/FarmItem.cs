@@ -11,17 +11,19 @@ public class FarmItem : GameItem
     private int amount;
     private float produceTime;
     private int cost;
+    private int buildCost;
 
     private bool Growing;
     private float remainTime;
     private bool toStore;
 
-    public void SetProps(string str, int num, float time, int price)
+    public void SetProps(string str, int num, float time, int price, int bCost)
     {
         matName = str;
         amount = num;
         produceTime = time;
         cost = price;
+        buildCost = cost;
     }
 
     // Start is called before the first frame update
@@ -45,6 +47,13 @@ public class FarmItem : GameItem
             remainTime = produceTime;
             progress.text = "0%";
         }
+    }
+
+    public override void DestroyItem()
+    {
+        SceneManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
+        transform.parent.gameObject.layer = 9;
+        base.DestroyItem();
     }
 
     public int GetAmount()

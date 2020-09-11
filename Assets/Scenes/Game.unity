@@ -540,7 +540,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.66
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4859,6 +4859,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!224 &699575397 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 11543547264151062, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
+  m_PrefabInstance: {fileID: 5431889263782839663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &707059871
 GameObject:
   m_ObjectHideFlags: 0
@@ -15955,6 +15960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyText: {fileID: 334895718}
   starText: {fileID: 171816044}
+  brush: {fileID: 699575397}
 --- !u!1001 &1445942482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19525,8 +19531,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1188459401}
-        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+      - m_Target: {fileID: 1438899029}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: SpeedUp
         m_Mode: 1
         m_Arguments:
@@ -19788,8 +19794,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1188459401}
-        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+      - m_Target: {fileID: 1438899029}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
@@ -21449,8 +21455,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1188459401}
-        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+      - m_Target: {fileID: 1438899029}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: RestoreSpeed
         m_Mode: 1
         m_Arguments:
@@ -24083,7 +24089,7 @@ PrefabInstance:
       objectReference: {fileID: 1953879677}
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: SceneManager, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -24096,7 +24102,7 @@ PrefabInstance:
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1188459401}
+      objectReference: {fileID: 1438899029}
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: DestroyItem
@@ -24303,6 +24309,10 @@ PrefabInstance:
       value: '100
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685280972123704020, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreateSeed
       objectReference: {fileID: 0}
     - target: {fileID: 1708339929980567498, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: m_AnchorMin.y

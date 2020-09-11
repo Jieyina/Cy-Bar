@@ -82,10 +82,10 @@ public class Customer : GameItem
         moneyText.text = "+ " + payment.ToString();
         moneyAnim.SetTrigger("start");
         starAnim.SetTrigger("start");
-        while (!moneyAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
-            yield return null;
         SceneManager.Instance.Player.GainMoney(payment);
         SceneManager.Instance.Player.GainStar(rating);
+        while (!moneyAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            yield return null;
         customerAnim.SetTrigger("leave");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
@@ -101,9 +101,9 @@ public class Customer : GameItem
             yield return null;
         starText.text = "- 1";
         starAnim.SetTrigger("start");
+        SceneManager.Instance.Player.GainStar(-1);
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
-        SceneManager.Instance.Player.GainStar(-1);
         customerAnim.SetTrigger("leave");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
@@ -125,11 +125,30 @@ public class Customer : GameItem
 
     public override void DestroyItem()
     {
+        timeSlider.gameObject.SetActive(false);
         StopAllCoroutines();
         if (waitOrder1)
             SceneManager.Instance.Bar.RemoveOrder(order1);
         if (waitOrder2)
             SceneManager.Instance.Bar.RemoveOrder(order2);
+        StartCoroutine(KickOut());
+    }
+
+    private IEnumerator KickOut()
+    {
+        leaveAnim.SetTrigger("kickOut");
+        starText.text = "- 5";
+        starAnim.SetTrigger("kickOut");
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("start"))
+            yield return null;
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            yield return null;
+        SceneManager.Instance.Player.GainStar(-5);
+        foodLeft.SetActive(false);
+        customerAnim.SetTrigger("kickOut");
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            yield return null;
+        table.GetComponent<BarTable>().EmptyTable(false);
         base.DestroyItem();
     }
 

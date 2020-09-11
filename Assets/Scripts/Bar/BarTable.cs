@@ -9,41 +9,67 @@ public class BarTable : GameItem
     [SerializeField]
     private List<GameObject> customerPrefab = null;
 
+    private int buildCost;
+
     private bool empty;
-    private float interval;
-    private float startTime;
+    private float emptyTime;
+    private float remainTime;
     private GameObject customer;
+
+    public void SetCost(int cost)
+    {
+        buildCost = cost;
+    }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         empty = true;
-        interval = Random.Range(1.2f, maxEmptyTime);
-        startTime = Time.time;
+        emptyTime = Random.Range(1.2f, maxEmptyTime);
+        remainTime = emptyTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (empty && Time.time - startTime > interval)
+        if (empty)
         {
-            empty = false;
-            int i = Random.Range(0, customerPrefab.Count);
-            customer = Instantiate(customerPrefab[i], transform.Find("spawnPoint"));
-            customer.GetComponent<Customer>().Table = gameObject;
+            remainTime -= playSpeed * Time.deltaTime;
+            if (remainTime < 0)
+            {
+                empty = false;
+                int i = Random.Range(0, customerPrefab.Count);
+                customer = Instantiate(customerPrefab[i], transform.Find("spawnPoint"));
+                customer.GetComponent<Customer>().Table = gameObject;
+            }
         }
     }
 
-    public void EmptyTable()
+    public void EmptyTable(bool keepTable = true)
     {
-        empty = true;
-        interval = Random.Range(1.2f, maxEmptyTime);
-        startTime = Time.time;
+        customer = null;
+        if (keepTable)
+        {
+            empty = true;
+            emptyTime = Random.Range(1.2f, maxEmptyTime);
+            remainTime = emptyTime;
+        }
     }
 
     public override void DestroyItem()
     {
-        customer.GetComponent<GameItem>().DestroyItem();
+
+        StartCoroutine(DestroyTable());
+    }
+
+    private IEnumerator DestroyTable()
+    {
+        if (customer)
+            customer.GetComponent<GameItem>().DestroyItem();
+        while (customer != null)
+            yield return null;
+        SceneManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
+        transform.parent.gameObject.layer = 8;
         base.DestroyItem();
     }
 }

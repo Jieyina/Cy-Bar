@@ -10,17 +10,19 @@ public class FactoryItem : GameItem
     private Receipe receipe;
     private float produceTime;
     private int profit;
+    private int buildCost;
     private static float chargeRate = 0.4f;
 
     private bool producing = false;
     private float remainTime;
     private KeyValuePair<Receipe, GameObject> orderPair;
 
-    public void SetReceipe(Receipe rec, float time, int prof)
+    public void SetReceipe(Receipe rec, float time, int prof, int cost)
     {
         receipe = rec;
         produceTime = time;
         profit = prof;
+        buildCost = cost;
     }
 
     public void StartProduction(KeyValuePair<Receipe, GameObject> pair)
@@ -49,6 +51,8 @@ public class FactoryItem : GameItem
         {
             SceneManager.Instance.Factory.RemoveIdleFactory(receipe, gameObject);
         }
+        SceneManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost*0.5f));
+        transform.parent.gameObject.layer = 10;
         base.DestroyItem();
     }
 
