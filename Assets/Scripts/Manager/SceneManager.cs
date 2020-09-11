@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
@@ -28,33 +29,51 @@ public class SceneManager : MonoBehaviour
     public void SpeedUp()
     {
         GameItem.SetPlaySpeed(2);
-        GameItem[] items = FindObjectsOfType<GameItem>();
-        if (items.Length != 0)
+        //GameItem[] items = FindObjectsOfType<GameItem>();
+        //if (items.Length != 0)
+        //{
+        //    foreach (var item in items)
+        //        item.SetAnimSpeed();
+        //}
+        Animator[] anims = FindObjectsOfType<Animator>();
+        if (anims.Length != 0)
         {
-            foreach (var item in items)
-                item.SetAnimSpeed();
+            foreach (var anim in anims)
+                anim.speed = 2;
         }
     }
 
     public void RestoreSpeed()
     {
         GameItem.SetPlaySpeed(1);
-        GameItem[] items = FindObjectsOfType<GameItem>();
-        if (items.Length != 0)
+        //GameItem[] items = FindObjectsOfType<GameItem>();
+        //if (items.Length != 0)
+        //{
+        //    foreach (var item in items)
+        //        item.SetAnimSpeed();
+        //}
+        Animator[] anims = FindObjectsOfType<Animator>();
+        if (anims.Length != 0)
         {
-            foreach (var item in items)
-                item.SetAnimSpeed();
+            foreach (var anim in anims)
+                anim.speed = 1;
         }
     }
 
     public void Pause()
     {
         GameItem.SetPlaySpeed(0);
-        GameItem[] items = FindObjectsOfType<GameItem>();
-        if (items.Length != 0)
+        //GameItem[] items = FindObjectsOfType<GameItem>();
+        //if (items.Length != 0)
+        //{
+        //    foreach (var item in items)
+        //        item.SetAnimSpeed();
+        //}
+        Animator[] anims = FindObjectsOfType<Animator>();
+        if (anims.Length != 0)
         {
-            foreach (var item in items)
-                item.SetAnimSpeed();
+            foreach (var anim in anims)
+                anim.speed = 0;
         }
     }
 
