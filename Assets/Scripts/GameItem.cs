@@ -20,6 +20,11 @@ public class GameItem : MonoBehaviour
         
     }
 
+    public virtual void DestroyItem()
+    {
+        Destroy(gameObject);
+    }
+
     public static void SetPlaySpeed(int newSpeed)
     {
         playSpeed = newSpeed;

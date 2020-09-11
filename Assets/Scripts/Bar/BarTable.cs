@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarTable : MonoBehaviour
+public class BarTable : GameItem
 {
     [SerializeField]
     private float maxEmptyTime= 5f;
@@ -12,9 +12,10 @@ public class BarTable : MonoBehaviour
     private bool empty;
     private float interval;
     private float startTime;
+    private GameObject customer;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         empty = true;
         interval = Random.Range(1.2f, maxEmptyTime);
@@ -28,7 +29,7 @@ public class BarTable : MonoBehaviour
         {
             empty = false;
             int i = Random.Range(0, customerPrefab.Count);
-            GameObject customer = Instantiate(customerPrefab[i], transform.Find("spawnPoint"));
+            customer = Instantiate(customerPrefab[i], transform.Find("spawnPoint"));
             customer.GetComponent<Customer>().Table = gameObject;
         }
     }
@@ -38,5 +39,11 @@ public class BarTable : MonoBehaviour
         empty = true;
         interval = Random.Range(1.2f, maxEmptyTime);
         startTime = Time.time;
+    }
+
+    public override void DestroyItem()
+    {
+        customer.GetComponent<GameItem>().DestroyItem();
+        base.DestroyItem();
     }
 }

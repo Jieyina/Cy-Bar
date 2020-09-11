@@ -35,20 +35,28 @@ public class FactoryItem : GameItem
     {
         producing = false;
         progress.text = "0%";
-        SceneManager.Instance.Factory.AddFactory(receipe, gameObject);
+        SceneManager.Instance.Factory.AddIdleFactory(receipe, gameObject);
     }
 
-    private IEnumerator clearProgress()
+    public override void DestroyItem()
     {
-        yield return new WaitForSeconds(0.5f);
-        progress.text = "0%";
+        if (producing)
+        {
+            SceneManager.Instance.Factory.RemoveWorkingFac(orderPair);
+            SceneManager.Instance.Bar.AddOrder(orderPair);
+        }
+        else
+        {
+            SceneManager.Instance.Factory.RemoveIdleFactory(receipe, gameObject);
+        }
+        base.DestroyItem();
     }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        SceneManager.Instance.Factory.AddFactory(receipe,gameObject);
+        SceneManager.Instance.Factory.AddIdleFactory(receipe,gameObject);
     }
 
     // Update is called once per frame
@@ -60,8 +68,7 @@ public class FactoryItem : GameItem
             if (remainTime < 0)
             {
                 producing = false;
-                progress.text = "100%";
-                StartCoroutine(clearProgress());
+                progress.text = "0%";
                 SceneManager.Instance.Factory.FinishProduction(orderPair);
                 orderPair.Value.GetComponent<Customer>().GetOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
             }

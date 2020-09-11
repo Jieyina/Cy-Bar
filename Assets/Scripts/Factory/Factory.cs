@@ -29,13 +29,23 @@ public class Factory : MonoBehaviour
         return null;
     }
 
-    public void AddFactory(Receipe receipe, GameObject obj)
+    public void AddIdleFactory(Receipe receipe, GameObject fac)
     {
         if (!idleFactories.ContainsKey(receipe))
         {
             idleFactories.Add(receipe, new List<GameObject>());
         }
-        idleFactories[receipe].Add(obj);
+        idleFactories[receipe].Add(fac);
+    }
+
+    public void RemoveIdleFactory(Receipe receipe, GameObject fac)
+    {
+        idleFactories[receipe].Remove(fac);
+    }
+
+    public void RemoveWorkingFac(KeyValuePair<Receipe, GameObject> pair)
+    {
+        workingFacs.Remove(pair);
     }
 
     public void AddFood(Receipe rec)

@@ -9,7 +9,11 @@ public class SceneManager : MonoBehaviour
     public Factory Factory { get; private set; }
     public Storage Storage { get; private set; }
     public Bar Bar { get; private set; }
-    public static SceneManager Instance { get; private set; } 
+    public static SceneManager Instance { get; private set; }
+
+    private bool destroy = false;
+    private RaycastHit hit;
+
     void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -54,6 +58,11 @@ public class SceneManager : MonoBehaviour
         }
     }
 
+    public void DestroyItem()
+    {
+        destroy = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +72,16 @@ public class SceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (destroy)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50000f, 1<<11))
+                {
+                    hit.transform.parent.gameObject.GetComponent<GameItem>().DestroyItem();
+                }
+                destroy = false;
+            }
+        }
     }
 }

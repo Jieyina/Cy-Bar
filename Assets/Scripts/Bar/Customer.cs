@@ -118,6 +118,16 @@ public class Customer : GameItem
         Destroy(gameObject);
     }
 
+    public override void DestroyItem()
+    {
+        StopAllCoroutines();
+        if (waitOrder1)
+            SceneManager.Instance.Bar.RemoveOrder(order1);
+        if (waitOrder2)
+            SceneManager.Instance.Bar.RemoveOrder(order2);
+        base.DestroyItem();
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
