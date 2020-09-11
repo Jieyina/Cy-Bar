@@ -111,6 +111,11 @@ public class Customer : GameItem
         timeSlider.gameObject.SetActive(false);
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
+        starText.text = "- 1";
+        starAnim.SetTrigger("start");
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            yield return null;
+        SceneManager.Instance.Player.GainStar(-1);
         customerAnim.SetTrigger("leave");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             yield return null;
