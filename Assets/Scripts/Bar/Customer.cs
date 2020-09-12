@@ -84,10 +84,10 @@ public class Customer : GameItem
         starAnim.SetTrigger("start");
         SceneManager.Instance.Player.GainMoney(payment);
         SceneManager.Instance.Player.GainStar(rating);
-        while (!moneyAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         customerAnim.SetTrigger("leave");
-        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         table.GetComponent<BarTable>().EmptyTable();
         Destroy(gameObject);
@@ -97,15 +97,13 @@ public class Customer : GameItem
     {
         timeSlider.gameObject.SetActive(false);
         leaveAnim.SetTrigger("start");
-        while (!leaveAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
-            yield return null;
         starText.text = "- 1";
         starAnim.SetTrigger("start");
         SceneManager.Instance.Player.GainStar(-1);
-        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         customerAnim.SetTrigger("leave");
-        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         table.GetComponent<BarTable>().EmptyTable();
         Destroy(gameObject);
@@ -117,7 +115,7 @@ public class Customer : GameItem
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
         customerAnim.SetTrigger("leave");
-        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         table.GetComponent<BarTable>().EmptyTable();
         Destroy(gameObject);
@@ -136,17 +134,22 @@ public class Customer : GameItem
 
     private IEnumerator KickOut()
     {
+        if (starAnim.GetCurrentAnimatorStateInfo(0).IsTag("star"))
+        {
+            while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
+                yield return null;
+        }
         leaveAnim.SetTrigger("kickOut");
         starText.text = "- 5";
         starAnim.SetTrigger("kickOut");
-        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("start"))
-            yield return null;
-        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
-            yield return null;
         SceneManager.Instance.Player.GainStar(-5);
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("star"))
+            yield return null;
+        while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
+            yield return null;
         foodLeft.SetActive(false);
         customerAnim.SetTrigger("kickOut");
-        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         table.GetComponent<BarTable>().EmptyTable(false);
         base.DestroyItem();
@@ -192,9 +195,15 @@ public class Customer : GameItem
                 timeSlider.value = 0;
                 countDownText.text = "0";
                 if (waitOrder1)
+                {
                     SceneManager.Instance.Bar.RemoveOrder(order1);
+                    waitOrder1 = false;
+                }
                 if (waitOrder2)
+                {
                     SceneManager.Instance.Bar.RemoveOrder(order2);
+                    waitOrder2 = false;
+                }
                 StartCoroutine(Leave());
             }
             else

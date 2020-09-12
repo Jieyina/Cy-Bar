@@ -87,8 +87,7 @@ public class UIManager : MonoBehaviour
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50000f, 1 << 11))
                 {
-                    GameItem item = hit.transform.parent.gameObject.GetComponent<GameItem>();
-                    item.DestroyItem();
+                    hit.transform.parent.gameObject.GetComponent<GameItem>().DestroyItem();
                 }
                 brush.localPosition = initBrushPos;
                 destroy = false;
