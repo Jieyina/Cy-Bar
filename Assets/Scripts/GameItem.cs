@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameItem : MonoBehaviour
 {
     protected static int playSpeed = 1;
+    public static int PlaySpeed { get { return playSpeed; } set { playSpeed = value; } }
+
     private Animator[] animators;
 
     // Start is called before the first frame update
@@ -23,11 +25,6 @@ public class GameItem : MonoBehaviour
     public virtual void DestroyItem()
     {
         Destroy(gameObject);
-    }
-
-    public static void SetPlaySpeed(int newSpeed)
-    {
-        playSpeed = newSpeed;
     }
 
     public void SetAnimSpeed()

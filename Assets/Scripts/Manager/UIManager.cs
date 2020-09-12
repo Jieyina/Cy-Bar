@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     private Text starText = null;
     [SerializeField]
     private Transform brush = null;
+    [SerializeField]
+    private Slider timeSlider = null;
 
     private bool destroy = false;
     private RaycastHit hit;
@@ -26,9 +28,14 @@ public class UIManager : MonoBehaviour
         starText.text = num.ToString();
     }
 
+    public void UpdateTimeSlider(float value)
+    {
+        timeSlider.value = value;
+    }
+
     public void SpeedUp()
     {
-        GameItem.SetPlaySpeed(2);
+        GameItem.PlaySpeed = 2;
         //GameItem[] items = FindObjectsOfType<GameItem>();
         //if (items.Length != 0)
         //{
@@ -45,7 +52,7 @@ public class UIManager : MonoBehaviour
 
     public void RestoreSpeed()
     {
-        GameItem.SetPlaySpeed(1);
+        GameItem.PlaySpeed = 1;
         Animator[] anims = FindObjectsOfType<Animator>();
         if (anims.Length != 0)
         {
@@ -56,7 +63,7 @@ public class UIManager : MonoBehaviour
 
     public void Pause()
     {
-        GameItem.SetPlaySpeed(0);
+        GameItem.PlaySpeed = 0;
         Animator[] anims = FindObjectsOfType<Animator>();
         if (anims.Length != 0)
         {

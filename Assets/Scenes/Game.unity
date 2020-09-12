@@ -540,7 +540,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.132
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -18006,6 +18006,7 @@ MonoBehaviour:
   moneyText: {fileID: 334895718}
   starText: {fileID: 171816044}
   brush: {fileID: 699575397}
+  timeSlider: {fileID: 91042881}
 --- !u!1001 &1445942482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21891,6 +21892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initMoney: 5500
+  initYear: 12
+  initMonth: 8
 --- !u!4 &1793348811
 Transform:
   m_ObjectHideFlags: 0
