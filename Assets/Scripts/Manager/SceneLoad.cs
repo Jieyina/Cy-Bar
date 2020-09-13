@@ -2,10 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class SceneLoad : MonoBehaviour
 {
     public void LoadS(string scenename){
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scenename);
+        SceneManager.LoadScene(scenename);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void QuitEditor()
+    {
+        EditorApplication.isPlaying = false;
     }
 }

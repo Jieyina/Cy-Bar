@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 864b722f76f610743be07b7c2211f5be
+  - enabled: 1
+    path: Assets/Scenes/BigWorld.unity
+    guid: 93af8f85a975cbe40bde5c79ccc684ba
   m_configObjects: {}

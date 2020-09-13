@@ -117,6 +117,11 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void GoToBigWorld()
+    {
+        SceneManager.LoadScene("BigWorld");
+    }
+
     public void SpeedUp()
     {
         playSpeed = 2;
