@@ -68,7 +68,7 @@ public class FactoryItem : GameItem
     {
         if (producing)
         {
-            remainTime -= playSpeed * Time.deltaTime;
+            remainTime -= SceneItemManager.Instance.Player.PlaySpeed * Time.deltaTime;
             if (remainTime < 0)
             {
                 producing = false;

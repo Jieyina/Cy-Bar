@@ -1035,6 +1035,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1685280971644041128, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
   m_PrefabInstance: {fileID: 125029466}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &143817140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 471672878861770761, guid: 9d1f580d6e921fd42b163759c0ae78ee, type: 3}
+  m_PrefabInstance: {fileID: 423794744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &147055790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2367,6 +2372,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240976867}
   m_CullTransparentMesh: 0
+--- !u!1 &275798520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 471672878861770761, guid: 9d1f580d6e921fd42b163759c0ae78ee, type: 3}
+  m_PrefabInstance: {fileID: 1231930193}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &285478352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4026,7 +4036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776420320119594933, guid: 9d1f580d6e921fd42b163759c0ae78ee, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 316
+      value: 299.53488
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1f580d6e921fd42b163759c0ae78ee, type: 3}
@@ -4184,7 +4194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420.5, y: -40}
+  m_AnchoredPosition: {x: 414.9535, y: -40}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433169143
@@ -13859,7 +13869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.5, y: -40}
+  m_AnchoredPosition: {x: 85.046524, y: -40}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119420986
@@ -16033,7 +16043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776420320119594933, guid: 9d1f580d6e921fd42b163759c0ae78ee, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 228.8372
       objectReference: {fileID: 0}
     - target: {fileID: 6776420320119594938, guid: 9d1f580d6e921fd42b163759c0ae78ee, type: 3}
       propertyPath: m_Text
@@ -18296,6 +18306,8 @@ MonoBehaviour:
   starGoalText: {fileID: 0}
   foodGoalText: {fileID: 728793569}
   drinkGoalText: {fileID: 1370738565}
+  winUI: {fileID: 143817140}
+  failUI: {fileID: 275798520}
 --- !u!1001 &1445942482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18381,11 +18393,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6377406702058283614, guid: 995e872ecbb42ab4e9c84b62add475e8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 279
+      value: 267.90695
       objectReference: {fileID: 0}
     - target: {fileID: 6377406702058283614, guid: 995e872ecbb42ab4e9c84b62add475e8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 61
+      value: 57.674416
       objectReference: {fileID: 0}
     - target: {fileID: 6377406702058283614, guid: 995e872ecbb42ab4e9c84b62add475e8, type: 3}
       propertyPath: m_AnchorMin.x
@@ -22381,8 +22393,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1438899029}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1793348810}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: SpeedUp
         m_Mode: 1
         m_Arguments:
@@ -22644,8 +22656,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1438899029}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1793348810}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
@@ -24600,8 +24612,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1438899029}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1793348810}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: RestoreSpeed
         m_Mode: 1
         m_Arguments:
@@ -27411,7 +27423,7 @@ PrefabInstance:
       objectReference: {fileID: 1953879677}
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
+      value: Player, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -27424,7 +27436,7 @@ PrefabInstance:
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1438899029}
+      objectReference: {fileID: 1793348810}
     - target: {fileID: 5431889264545473048, guid: d52a934950e757a4ca29c90591d669cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: DestroyItem

@@ -42,7 +42,7 @@ public class Customer : GameItem
 
     public void GetOrder(KeyValuePair<Receipe, GameObject> order, int bill)
     {
-        if (order.Key.ReceipeName == order1.Key.ReceipeName)
+        if (!order1.Equals(default(KeyValuePair<Receipe, GameObject>)) && order.Key.ReceipeName == order1.Key.ReceipeName)
         {
             waitOrder1 = false;
             SceneItemManager.Instance.Player.GetFoodServe(1);
@@ -195,7 +195,7 @@ public class Customer : GameItem
     {
         if (waiting)
         {
-            remainTime -= playSpeed * Time.deltaTime;
+            remainTime -= SceneItemManager.Instance.Player.PlaySpeed * Time.deltaTime;
             if (remainTime < 0)
             {
                 waiting = false;

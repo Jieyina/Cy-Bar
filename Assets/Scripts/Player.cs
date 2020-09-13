@@ -33,6 +33,11 @@ public class Player : MonoBehaviour
     private bool foodGoalFin = true;
     private bool drinkGoalFin = true;
 
+    private int playSpeed = 1;
+    public int PlaySpeed { get { return playSpeed; } set { playSpeed = value; } }
+
+    private bool destroy = false;
+    private RaycastHit hit;
 
     public void spendMoney(int cost)
     {
@@ -47,7 +52,7 @@ public class Player : MonoBehaviour
         SceneItemManager.Instance.UI.UpdateMoney(money);
         if (coinGoal != 0)
         {
-            SceneItemManager.Instance.UI.UpdateCoinGoal(money, coinGoal);
+            SceneItemManager.Instance.UI.UpdateCoinGoal(coinEarned, coinGoal);
             if (!coinGoalFin && coinEarned >= coinGoal)
             {
                 coinGoalFin = true;
@@ -109,6 +114,44 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void SpeedUp()
+    {
+        playSpeed = 2;
+        Animator[] anims = FindObjectsOfType<Animator>();
+        if (anims.Length != 0)
+        {
+            foreach (var anim in anims)
+                anim.speed = 2;
+        }
+    }
+
+    public void RestoreSpeed()
+    {
+        playSpeed = 1;
+        Animator[] anims = FindObjectsOfType<Animator>();
+        if (anims.Length != 0)
+        {
+            foreach (var anim in anims)
+                anim.speed = 1;
+        }
+    }
+
+    public void Pause()
+    {
+        playSpeed = 0;
+        Animator[] anims = FindObjectsOfType<Animator>();
+        if (anims.Length != 0)
+        {
+            foreach (var anim in anims)
+                anim.speed = 0;
+        }
+    }
+
+    public void DestroyItem()
+    {
+        destroy = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -144,15 +187,33 @@ public class Player : MonoBehaviour
     {
         if (counting)
         {
-            remainTime -= GameItem.PlaySpeed * Time.deltaTime;
+            remainTime -= playSpeed * Time.deltaTime;
             SceneItemManager.Instance.UI.UpdateTimeSlider(remainTime/initTime);
             if (coinGoalFin&&starGoalFin&&foodGoalFin&&drinkGoalFin)
             {
                 counting = false;
+                playSpeed = 0;
+                SceneItemManager.Instance.UI.ShowWinUI();
             }
             if (remainTime<0)
             {
                 counting = false;
+                playSpeed = 0;
+                SceneItemManager.Instance.UI.ShowFailUI();
+            }
+        }
+
+        if (destroy)
+        {
+            SceneItemManager.Instance.UI.UpdateBrushPos();
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50000f, 1 << 11))
+                {
+                    hit.transform.parent.gameObject.GetComponent<GameItem>().DestroyItem();
+                }
+                SceneItemManager.Instance.UI.RestoreBrushPos();
+                destroy = false;
             }
         }
     }

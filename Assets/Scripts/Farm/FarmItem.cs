@@ -66,7 +66,7 @@ public class FarmItem : GameItem
     {
         if (Growing)
         {
-            remainTime -= playSpeed * Time.deltaTime;
+            remainTime -= SceneItemManager.Instance.Player.PlaySpeed * Time.deltaTime;
             if (remainTime < 0)
             {
                 Growing = false;
