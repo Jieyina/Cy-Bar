@@ -30,23 +30,17 @@ public class FarmItem : GameItem
     protected override void Start()
     {
         base.Start();
-        if (SceneItemManager.Instance.Player.canAfford(cost))
-        {
-            SceneItemManager.Instance.Player.spendMoney(cost);
-            Growing = true;
-            remainTime = produceTime;
-        }
+        SceneItemManager.Instance.Player.SpendMoney(cost);
+        Growing = true;
+        remainTime = produceTime;
     }
 
     private void RestartGrow()
     {
-        if (SceneItemManager.Instance.Player.canAfford(cost))
-        {
-            SceneItemManager.Instance.Player.spendMoney(cost);
-            Growing = true;
-            remainTime = produceTime;
-            progress.text = "0%";
-        }
+        SceneItemManager.Instance.Player.SpendMoney(cost);
+        Growing = true;
+        remainTime = produceTime;
+        progress.text = "0%";
     }
 
     public override void DestroyItem()

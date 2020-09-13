@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     private bool destroy = false;
     private RaycastHit hit;
 
-    public void spendMoney(int cost)
+    public void SpendMoney(int cost)
     {
         money -= cost;
         SceneItemManager.Instance.UI.UpdateMoney(money);
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool canAfford(int cost)
+    public bool CanAfford(int cost)
     {
         return money >= cost;
     }

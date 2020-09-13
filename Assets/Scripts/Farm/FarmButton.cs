@@ -46,13 +46,13 @@ public class FarmButton : MonoBehaviour
             {
                 shadow.transform.Find("highlight").gameObject.SetActive(true);
                 shadow.transform.position = hit.transform.position;
-                if (Input.GetMouseButtonDown(0) && SceneItemManager.Instance.Player.canAfford(authorizationCost))
+                if (Input.GetMouseButtonDown(0))
                 {
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
                     newItem.transform.parent = hit.transform;
                     newItem.GetComponent<FarmItem>().SetProps(matName, produceNum, growTime, activationCost, authorizationCost);
                     hit.transform.gameObject.layer = 0;
-                    SceneItemManager.Instance.Player.spendMoney(authorizationCost);
+                    SceneItemManager.Instance.Player.SpendMoney(authorizationCost);
                 }
             }
             else
