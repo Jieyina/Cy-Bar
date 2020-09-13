@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class GameItem : MonoBehaviour
 {
-    protected static int playSpeed = 1;
-    public static int PlaySpeed { get { return playSpeed; } set { playSpeed = value; } }
-
-    private Animator[] animators;
+    protected Animator[] animators;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         animators = GetComponentsInChildren<Animator>();
-        SetAnimSpeed();
+        if (animators.Length != 0)
+        {
+            foreach (Animator anim in animators)
+                anim.speed = SceneItemManager.Instance.Player.PlaySpeed;
+        }
     }
 
     // Update is called once per frame
@@ -27,12 +28,4 @@ public class GameItem : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetAnimSpeed()
-    {
-        if (animators.Length != 0)
-        {
-            foreach (Animator anim in animators)
-                anim.speed = playSpeed;
-        }
-    }
 }

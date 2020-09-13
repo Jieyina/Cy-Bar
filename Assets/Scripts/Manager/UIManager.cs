@@ -21,9 +21,11 @@ public class UIManager : MonoBehaviour
     private Text foodGoalText = null;
     [SerializeField]
     private Text drinkGoalText = null;
+    [SerializeField]
+    private GameObject winUI = null;
+    [SerializeField]
+    private GameObject failUI = null;
 
-    private bool destroy = false;
-    private RaycastHit hit;
     private Vector3 initBrushPos;
 
     public void UpdateMoney(int num)
@@ -81,50 +83,25 @@ public class UIManager : MonoBehaviour
         drinkGoalText.transform.Find("YesMark").gameObject.SetActive(true);
     }
 
-    public void SpeedUp()
+    public void UpdateBrushPos()
     {
-        GameItem.PlaySpeed = 2;
-        //GameItem[] items = FindObjectsOfType<GameItem>();
-        //if (items.Length != 0)
-        //{
-        //    foreach (var item in items)
-        //        item.SetAnimSpeed();
-        //}
-        Animator[] anims = FindObjectsOfType<Animator>();
-        if (anims.Length != 0)
-        {
-            foreach (var anim in anims)
-                anim.speed = 2;
-        }
+        brush.position = Input.mousePosition;
     }
 
-    public void RestoreSpeed()
+    public void RestoreBrushPos()
     {
-        GameItem.PlaySpeed = 1;
-        Animator[] anims = FindObjectsOfType<Animator>();
-        if (anims.Length != 0)
-        {
-            foreach (var anim in anims)
-                anim.speed = 1;
-        }
+        brush.localPosition = initBrushPos;
     }
 
-    public void Pause()
+    public void ShowWinUI()
     {
-        GameItem.PlaySpeed = 0;
-        Animator[] anims = FindObjectsOfType<Animator>();
-        if (anims.Length != 0)
-        {
-            foreach (var anim in anims)
-                anim.speed = 0;
-        }
+        winUI.SetActive(true);
     }
 
-    public void DestroyItem()
+    public void ShowFailUI()
     {
-        destroy = true;
+        failUI.SetActive(true);
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -135,18 +112,6 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (destroy)
-        {
-            brush.position = Input.mousePosition;
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50000f, 1 << 11))
-                {
-                    hit.transform.parent.gameObject.GetComponent<GameItem>().DestroyItem();
-                }
-                brush.localPosition = initBrushPos;
-                destroy = false;
-            }
-        }
+
     }
 }

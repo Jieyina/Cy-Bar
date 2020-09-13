@@ -42,15 +42,15 @@ public class Customer : GameItem
 
     public void GetOrder(KeyValuePair<Receipe, GameObject> order, int bill)
     {
-        if (order.Key.ReceipeName == order1.Key.ReceipeName)
+        if (!order1.Equals(default(KeyValuePair<Receipe, GameObject>)) && order.Key.ReceipeName == order1.Key.ReceipeName)
         {
             waitOrder1 = false;
-            SceneManager.Instance.Player.GetFoodServe(1);
+            SceneItemManager.Instance.Player.GetFoodServe(1);
         }
         else
         {
             waitOrder2 = false;
-            SceneManager.Instance.Player.GetDrinkServe(1);
+            SceneItemManager.Instance.Player.GetDrinkServe(1);
         }
         payment += bill;
         if (!waitOrder1 && !waitOrder2)
@@ -89,8 +89,8 @@ public class Customer : GameItem
         moneyText.text = "+ " + payment.ToString();
         moneyAnim.SetTrigger("start");
         starAnim.SetTrigger("start");
-        SceneManager.Instance.Player.GainMoney(payment);
-        SceneManager.Instance.Player.GainStar(rating);
+        SceneItemManager.Instance.Player.GainMoney(payment);
+        SceneItemManager.Instance.Player.GainStar(rating);
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         customerAnim.SetTrigger("leave");
@@ -106,7 +106,7 @@ public class Customer : GameItem
         leaveAnim.SetTrigger("start");
         starText.text = "- 1";
         starAnim.SetTrigger("start");
-        SceneManager.Instance.Player.GainStar(-1);
+        SceneItemManager.Instance.Player.GainStar(-1);
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
         customerAnim.SetTrigger("leave");
@@ -133,9 +133,9 @@ public class Customer : GameItem
         timeSlider.gameObject.SetActive(false);
         StopAllCoroutines();
         if (waitOrder1)
-            SceneManager.Instance.Bar.RemoveOrder(order1);
+            SceneItemManager.Instance.Bar.RemoveOrder(order1);
         if (waitOrder2)
-            SceneManager.Instance.Bar.RemoveOrder(order2);
+            SceneItemManager.Instance.Bar.RemoveOrder(order2);
         StartCoroutine(KickOut());
     }
 
@@ -149,7 +149,7 @@ public class Customer : GameItem
         leaveAnim.SetTrigger("kickOut");
         starText.text = "- 5";
         starAnim.SetTrigger("kickOut");
-        SceneManager.Instance.Player.GainStar(-5);
+        SceneItemManager.Instance.Player.GainStar(-5);
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("star"))
             yield return null;
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
@@ -166,19 +166,19 @@ public class Customer : GameItem
     protected override void Start()
     {
         base.Start();
-        Receipe foodOrder = SceneManager.Instance.Factory.GetRandomFood();
+        Receipe foodOrder = SceneItemManager.Instance.Factory.GetRandomFood();
         if (foodOrder != null)
         {
             order1 = new KeyValuePair<Receipe, GameObject>(foodOrder, gameObject);
             waitOrder1 = true;
-            SceneManager.Instance.Bar.AddOrder(order1);
+            SceneItemManager.Instance.Bar.AddOrder(order1);
         }
-        Receipe drinkOrder = SceneManager.Instance.Factory.GetRandomDrink();
+        Receipe drinkOrder = SceneItemManager.Instance.Factory.GetRandomDrink();
         if (drinkOrder != null)
         {
             order2 = new KeyValuePair<Receipe, GameObject>(drinkOrder, gameObject);
             waitOrder2 = true;
-            SceneManager.Instance.Bar.AddOrder(order2);
+            SceneItemManager.Instance.Bar.AddOrder(order2);
         }
         if (foodOrder==null&&drinkOrder==null)
         {
@@ -195,7 +195,7 @@ public class Customer : GameItem
     {
         if (waiting)
         {
-            remainTime -= playSpeed * Time.deltaTime;
+            remainTime -= SceneItemManager.Instance.Player.PlaySpeed * Time.deltaTime;
             if (remainTime < 0)
             {
                 waiting = false;
@@ -203,12 +203,12 @@ public class Customer : GameItem
                 countDownText.text = "0";
                 if (waitOrder1)
                 {
-                    SceneManager.Instance.Bar.RemoveOrder(order1);
+                    SceneItemManager.Instance.Bar.RemoveOrder(order1);
                     waitOrder1 = false;
                 }
                 if (waitOrder2)
                 {
-                    SceneManager.Instance.Bar.RemoveOrder(order2);
+                    SceneItemManager.Instance.Bar.RemoveOrder(order2);
                     waitOrder2 = false;
                 }
                 StartCoroutine(Leave());

@@ -30,9 +30,9 @@ public class FarmItem : GameItem
     protected override void Start()
     {
         base.Start();
-        if (SceneManager.Instance.Player.canAfford(cost))
+        if (SceneItemManager.Instance.Player.canAfford(cost))
         {
-            SceneManager.Instance.Player.spendMoney(cost);
+            SceneItemManager.Instance.Player.spendMoney(cost);
             Growing = true;
             remainTime = produceTime;
         }
@@ -40,9 +40,9 @@ public class FarmItem : GameItem
 
     private void RestartGrow()
     {
-        if (SceneManager.Instance.Player.canAfford(cost))
+        if (SceneItemManager.Instance.Player.canAfford(cost))
         {
-            SceneManager.Instance.Player.spendMoney(cost);
+            SceneItemManager.Instance.Player.spendMoney(cost);
             Growing = true;
             remainTime = produceTime;
             progress.text = "0%";
@@ -51,7 +51,7 @@ public class FarmItem : GameItem
 
     public override void DestroyItem()
     {
-        SceneManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
+        SceneItemManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
         transform.parent.gameObject.layer = 9;
         base.DestroyItem();
     }
@@ -66,14 +66,14 @@ public class FarmItem : GameItem
     {
         if (Growing)
         {
-            remainTime -= playSpeed * Time.deltaTime;
+            remainTime -= SceneItemManager.Instance.Player.PlaySpeed * Time.deltaTime;
             if (remainTime < 0)
             {
                 Growing = false;
                 progress.text = "100%";
-                if (SceneManager.Instance.Storage.CheckCapacity())
+                if (SceneItemManager.Instance.Storage.CheckCapacity())
                 {
-                    SceneManager.Instance.Storage.AddMaterial(matName, amount);
+                    SceneItemManager.Instance.Storage.AddMaterial(matName, amount);
                     RestartGrow();
                 }
                 else
@@ -89,9 +89,9 @@ public class FarmItem : GameItem
 
         if (toStore)
         {
-            if (SceneManager.Instance.Storage.CheckCapacity())
+            if (SceneItemManager.Instance.Storage.CheckCapacity())
             {
-                SceneManager.Instance.Storage.AddMaterial(matName, amount);
+                SceneItemManager.Instance.Storage.AddMaterial(matName, amount);
                 RestartGrow();
                 toStore = false;
             }

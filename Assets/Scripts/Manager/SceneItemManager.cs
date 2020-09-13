@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneItemManager : MonoBehaviour
 {
     public Player Player { get; private set; }
     public UIManager UI { get; private set; }
     public Factory Factory { get; private set; }
     public Storage Storage { get; private set; }
     public Bar Bar { get; private set; }
-    public static SceneManager Instance { get; private set; }
+    public static SceneItemManager Instance { get; private set; }
 
     void Awake()
     {

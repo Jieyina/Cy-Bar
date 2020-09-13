@@ -34,7 +34,7 @@ public class FactoryButton : MonoBehaviour
         Receipe rec;
         if (type == 1)
         {
-            rec = SceneManager.Instance.Factory.LearnedFood(receipeName);
+            rec = SceneItemManager.Instance.Factory.LearnedFood(receipeName);
             if (rec == null)
             {
                 rec = new Receipe(receipeName, type);
@@ -42,12 +42,12 @@ public class FactoryButton : MonoBehaviour
                 {
                     rec.AddIngredient(materials[i], amount[i]);
                 }
-                SceneManager.Instance.Factory.AddFood(rec);
+                SceneItemManager.Instance.Factory.AddFood(rec);
             }
         }
         else
         {
-            rec = SceneManager.Instance.Factory.LearnedDrink(receipeName);
+            rec = SceneItemManager.Instance.Factory.LearnedDrink(receipeName);
             if (rec == null)
             {
                 rec = new Receipe(receipeName, type);
@@ -55,7 +55,7 @@ public class FactoryButton : MonoBehaviour
                 {
                     rec.AddIngredient(materials[i], amount[i]);
                 }
-                SceneManager.Instance.Factory.AddDrink(rec);
+                SceneItemManager.Instance.Factory.AddDrink(rec);
             }
         }
         return rec;
@@ -93,14 +93,14 @@ public class FactoryButton : MonoBehaviour
             {
                 shadow.transform.Find("highlight").gameObject.SetActive(true);
                 shadow.transform.position = hit.transform.position;
-                if (Input.GetMouseButtonDown(0) && SceneManager.Instance.Player.canAfford(buildCost))
+                if (Input.GetMouseButtonDown(0) && SceneItemManager.Instance.Player.canAfford(buildCost))
                 {
                     Receipe rec = CreateReceipe();
                     GameObject newItem = Instantiate(item, shadow.transform.position, shadow.transform.rotation);
                     newItem.transform.parent = hit.transform;
                     newItem.GetComponent<FactoryItem>().SetReceipe(rec,produceTime,price,buildCost);
                     hit.transform.gameObject.layer = 0;
-                    SceneManager.Instance.Player.spendMoney(buildCost);
+                    SceneItemManager.Instance.Player.spendMoney(buildCost);
                 }
             }
             else
