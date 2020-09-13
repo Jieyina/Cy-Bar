@@ -89,7 +89,7 @@ public class Customer : GameItem
         moneyText.text = "+ " + payment.ToString();
         moneyAnim.SetTrigger("start");
         starAnim.SetTrigger("start");
-        SceneItemManager.Instance.Player.GainMoney(payment);
+        SceneItemManager.Instance.Player.GainMoney(payment,true);
         SceneItemManager.Instance.Player.GainStar(rating);
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;

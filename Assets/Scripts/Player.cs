@@ -45,18 +45,21 @@ public class Player : MonoBehaviour
         SceneItemManager.Instance.UI.UpdateMoney(money);
     }
 
-    public void GainMoney(int num)
+    public void GainMoney(int num, bool earned = false)
     {
         money += num;
-        coinEarned += num;
         SceneItemManager.Instance.UI.UpdateMoney(money);
-        if (coinGoal != 0)
+        if (earned)
         {
-            SceneItemManager.Instance.UI.UpdateCoinGoal(coinEarned, coinGoal);
-            if (!coinGoalFin && coinEarned >= coinGoal)
+            coinEarned += num;
+            if (coinGoal != 0)
             {
-                coinGoalFin = true;
-                SceneItemManager.Instance.UI.CheckCoinGoal();
+                SceneItemManager.Instance.UI.UpdateCoinGoal(coinEarned, coinGoal);
+                if (!coinGoalFin && coinEarned >= coinGoal)
+                {
+                    coinGoalFin = true;
+                    SceneItemManager.Instance.UI.CheckCoinGoal();
+                }
             }
         }
     }
