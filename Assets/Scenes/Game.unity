@@ -3453,7 +3453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &398428387
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10627,6 +10627,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3684310874238882460, guid: 1d4d6d4297d5759478d026dd90b7d9b6, type: 3}
   m_PrefabInstance: {fileID: 716834714}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &728793569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1602878503797048172, guid: f3a1bc8cc1d8181498caa6fe118496b9, type: 3}
+  m_PrefabInstance: {fileID: 1602878504473241887}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &746338433
 GameObject:
   m_ObjectHideFlags: 0
@@ -11876,7 +11887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &937198573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17177,7 +17188,7 @@ GameObject:
   - component: {fileID: 1370738565}
   - component: {fileID: 1370738564}
   m_Layer: 5
-  m_Name: GoalList (1)
+  m_Name: DrinkGoal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18007,6 +18018,10 @@ MonoBehaviour:
   starText: {fileID: 171816044}
   brush: {fileID: 699575397}
   timeSlider: {fileID: 91042881}
+  coinGoalText: {fileID: 1559263259}
+  starGoalText: {fileID: 0}
+  foodGoalText: {fileID: 728793569}
+  drinkGoalText: {fileID: 1370738565}
 --- !u!1001 &1445942482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18858,7 +18873,7 @@ GameObject:
   - component: {fileID: 1559263259}
   - component: {fileID: 1559263258}
   m_Layer: 5
-  m_Name: GoalList (2)
+  m_Name: CoinGoal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21894,6 +21909,10 @@ MonoBehaviour:
   initMoney: 5500
   initYear: 12
   initMonth: 8
+  coinGoal: 1000
+  starGoal: 0
+  foodGoal: 1
+  drinkGoal: 1
 --- !u!4 &1793348811
 Transform:
   m_ObjectHideFlags: 0
@@ -24988,7 +25007,7 @@ PrefabInstance:
       objectReference: {fileID: 2569603166549338159, guid: ac568f6c66c09de4e8ffa8662bc104c5, type: 3}
     - target: {fileID: 6800610911479006497, guid: cc84e7a6c6edbda468037710c8224f62, type: 3}
       propertyPath: type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6800610911479006497, guid: cc84e7a6c6edbda468037710c8224f62, type: 3}
       propertyPath: receipeName
@@ -26180,7 +26199,7 @@ PrefabInstance:
       objectReference: {fileID: 2569603166549338159, guid: ac568f6c66c09de4e8ffa8662bc104c5, type: 3}
     - target: {fileID: 6800610911479006497, guid: cc84e7a6c6edbda468037710c8224f62, type: 3}
       propertyPath: type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6800610911479006497, guid: cc84e7a6c6edbda468037710c8224f62, type: 3}
       propertyPath: receipeName
@@ -26487,7 +26506,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1602878503797048175, guid: f3a1bc8cc1d8181498caa6fe118496b9, type: 3}
       propertyPath: m_Name
-      value: GoalList
+      value: FoodGoal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602878504813333709, guid: f3a1bc8cc1d8181498caa6fe118496b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3a1bc8cc1d8181498caa6fe118496b9, type: 3}

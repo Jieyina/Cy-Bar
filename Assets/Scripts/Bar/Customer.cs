@@ -43,8 +43,15 @@ public class Customer : GameItem
     public void GetOrder(KeyValuePair<Receipe, GameObject> order, int bill)
     {
         if (order.Key.ReceipeName == order1.Key.ReceipeName)
+        {
             waitOrder1 = false;
-        else waitOrder2 = false;
+            SceneManager.Instance.Player.GetFoodServe(1);
+        }
+        else
+        {
+            waitOrder2 = false;
+            SceneManager.Instance.Player.GetDrinkServe(1);
+        }
         payment += bill;
         if (!waitOrder1 && !waitOrder2)
         {

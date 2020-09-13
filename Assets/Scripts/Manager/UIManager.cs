@@ -13,6 +13,14 @@ public class UIManager : MonoBehaviour
     private Transform brush = null;
     [SerializeField]
     private Slider timeSlider = null;
+    [SerializeField]
+    private Text coinGoalText = null;
+    [SerializeField]
+    private Text starGoalText = null;
+    [SerializeField]
+    private Text foodGoalText = null;
+    [SerializeField]
+    private Text drinkGoalText = null;
 
     private bool destroy = false;
     private RaycastHit hit;
@@ -31,6 +39,46 @@ public class UIManager : MonoBehaviour
     public void UpdateTimeSlider(float value)
     {
         timeSlider.value = value;
+    }
+
+    public void UpdateCoinGoal(int cur, int goal)
+    {
+        coinGoalText.text = "☐ Earn " + cur.ToString() +"/" + goal.ToString() + " Bitcoins";
+    }
+
+    public void UpdateStarGoal(int cur, int goal)
+    {
+        starGoalText.text = "☐ Earn " + cur.ToString() + "/" + goal.ToString() + " Stars";
+    }
+
+    public void UpdateFoodGoal(int cur, int goal)
+    {
+        foodGoalText.text = "☐ Serve " + cur.ToString() + "/" + goal.ToString() + " Food";
+    }
+
+    public void UpdateDrinkGoal(int cur, int goal)
+    {
+        drinkGoalText.text = "☐ Serve " + cur.ToString() + "/" + goal.ToString() + " Drink";
+    }
+
+    public void CheckCoinGoal()
+    {
+        coinGoalText.transform.Find("YesMark").gameObject.SetActive(true);
+    }
+
+    public void CheckStarGoal()
+    {
+        starGoalText.transform.Find("YesMark").gameObject.SetActive(true);
+    }
+
+    public void CheckFoodGoal()
+    {
+        foodGoalText.transform.Find("YesMark").gameObject.SetActive(true);
+    }
+
+    public void CheckDrinkGoal()
+    {
+        drinkGoalText.transform.Find("YesMark").gameObject.SetActive(true);
     }
 
     public void SpeedUp()

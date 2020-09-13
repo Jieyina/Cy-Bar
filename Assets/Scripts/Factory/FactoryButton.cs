@@ -21,9 +21,10 @@ public class FactoryButton : MonoBehaviour
     private int price = 5;
     [SerializeField]
     private int buildCost = 5;
-
-    public GameObject shadePrefab;
-    public GameObject item;
+    [SerializeField]
+    private GameObject shadePrefab = null;
+    [SerializeField]
+    private GameObject item = null;
 
     private GameObject shadow;
     private RaycastHit hit;
