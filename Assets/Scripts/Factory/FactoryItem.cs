@@ -16,6 +16,12 @@ public class FactoryItem : GameItem
     private bool producing = false;
     private float remainTime;
     private KeyValuePair<Receipe, GameObject> orderPair;
+    private bool transmitting = false;
+    private Transform product;
+    private Vector3 initProductPos;
+    private GameObject line;
+    private LineRenderer lineRenderer;
+    private Transform destination;
 
     public void SetReceipe(Receipe rec, float time, int prof, int cost)
     {
@@ -35,15 +41,49 @@ public class FactoryItem : GameItem
 
     public void StopProduction()
     {
-        producing = false;
-        progress.text = "0%";
+        if (transmitting)
+        {
+            StopAllCoroutines();
+            product.gameObject.SetActive(false);
+            product.position = initProductPos;
+            line.SetActive(false);
+        }
+        else
+        {
+            producing = false;
+            progress.text = "0%";
+        }
         SceneItemManager.Instance.Factory.AddIdleFactory(receipe, gameObject);
+    }
+
+    private IEnumerator FinishProduction()
+    {
+        transmitting = true;
+        product.gameObject.SetActive(true);
+        line.SetActive(true);
+        float progress = 0f;
+        destination = orderPair.Value.transform.Find("receivePoint");
+        while (Vector3.Distance(product.position, destination.position) > 0.2f)
+        {
+            product.position = Vector3.Lerp(initProductPos, destination.position, progress);
+            progress += SceneItemManager.Instance.Player.PlaySpeed* Time.deltaTime;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, orderPair.Value.transform.position);
+            yield return null;
+        }
+        product.gameObject.SetActive(false);
+        product.position = initProductPos;
+        line.SetActive(false);
+        transmitting = false;
+        SceneItemManager.Instance.Factory.FinishProduction(orderPair);
+        orderPair.Value.GetComponent<Customer>().GetOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
     }
 
     public override void DestroyItem()
     {
-        if (producing)
+        if (producing || transmitting)
         {
+            StopAllCoroutines();
             SceneItemManager.Instance.Factory.RemoveWorkingFac(orderPair);
             SceneItemManager.Instance.Bar.AddOrder(orderPair);
         }
@@ -60,6 +100,10 @@ public class FactoryItem : GameItem
     protected override void Start()
     {
         base.Start();
+        product = transform.Find("product");
+        initProductPos = product.position;
+        line = transform.Find("line").gameObject;
+        lineRenderer = line.GetComponent<LineRenderer>();
         SceneItemManager.Instance.Factory.AddIdleFactory(receipe,gameObject);
     }
 
@@ -73,8 +117,9 @@ public class FactoryItem : GameItem
             {
                 producing = false;
                 progress.text = "0%";
-                SceneItemManager.Instance.Factory.FinishProduction(orderPair);
-                orderPair.Value.GetComponent<Customer>().GetOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+                //SceneItemManager.Instance.Factory.FinishProduction(orderPair);
+                //orderPair.Value.GetComponent<Customer>().GetOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
+                StartCoroutine(FinishProduction());
             }
             else
                 progress.text = Mathf.Floor((produceTime - remainTime) / produceTime * 100).ToString() + "%";
