@@ -975,11 +975,11 @@ PrefabInstance:
     - target: {fileID: 5585881043217040009, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: shadePrefab
       value: 
-      objectReference: {fileID: 4618756112450431949, guid: b8349ef22e27f7e489df834a46e37894, type: 3}
+      objectReference: {fileID: 4618756112450431949, guid: 08a0ba164918e8b48b0d9654e3c77bb3, type: 3}
     - target: {fileID: 5585881043217040009, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 7630261298372327848, guid: c2a5cf4312ee8db43bd393e6b1c3cc0f, type: 3}
+      objectReference: {fileID: 7630261298372327848, guid: 3b862163af8d14a4998fd8d7c4038b19, type: 3}
     - target: {fileID: 6657179357361135903, guid: ad8c055571c77af488ee7b8c1f4171de, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
