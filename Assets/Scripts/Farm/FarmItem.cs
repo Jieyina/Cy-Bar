@@ -23,7 +23,7 @@ public class FarmItem : GameItem
         amount = num;
         produceTime = time;
         cost = price;
-        buildCost = cost;
+        buildCost = bCost;
     }
 
     // Start is called before the first frame update
@@ -54,11 +54,6 @@ public class FarmItem : GameItem
         SceneItemManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
         transform.parent.gameObject.layer = 9;
         base.DestroyItem();
-    }
-
-    public int GetAmount()
-    {
-        return amount;
     }
 
     // Update is called once per frame
