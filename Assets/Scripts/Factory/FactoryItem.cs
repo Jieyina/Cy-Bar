@@ -37,21 +37,21 @@ public class FactoryItem : GameItem
     {
         producing = false;
         progress.text = "0%";
-        SceneManager.Instance.Factory.AddIdleFactory(receipe, gameObject);
+        SceneItemManager.Instance.Factory.AddIdleFactory(receipe, gameObject);
     }
 
     public override void DestroyItem()
     {
         if (producing)
         {
-            SceneManager.Instance.Factory.RemoveWorkingFac(orderPair);
-            SceneManager.Instance.Bar.AddOrder(orderPair);
+            SceneItemManager.Instance.Factory.RemoveWorkingFac(orderPair);
+            SceneItemManager.Instance.Bar.AddOrder(orderPair);
         }
         else
         {
-            SceneManager.Instance.Factory.RemoveIdleFactory(receipe, gameObject);
+            SceneItemManager.Instance.Factory.RemoveIdleFactory(receipe, gameObject);
         }
-        SceneManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost*0.5f));
+        SceneItemManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost*0.5f));
         transform.parent.gameObject.layer = 10;
         base.DestroyItem();
     }
@@ -60,7 +60,7 @@ public class FactoryItem : GameItem
     protected override void Start()
     {
         base.Start();
-        SceneManager.Instance.Factory.AddIdleFactory(receipe,gameObject);
+        SceneItemManager.Instance.Factory.AddIdleFactory(receipe,gameObject);
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class FactoryItem : GameItem
             {
                 producing = false;
                 progress.text = "0%";
-                SceneManager.Instance.Factory.FinishProduction(orderPair);
+                SceneItemManager.Instance.Factory.FinishProduction(orderPair);
                 orderPair.Value.GetComponent<Customer>().GetOrder(orderPair, (int)(profit * (1 - chargeRate) + 0.5f));
             }
             else

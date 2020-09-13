@@ -68,7 +68,7 @@ public class BarTable : GameItem
             customer.GetComponent<GameItem>().DestroyItem();
         while (customer != null)
             yield return null;
-        SceneManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
+        SceneItemManager.Instance.Player.GainMoney((int)Mathf.Floor(buildCost * 0.5f));
         transform.parent.gameObject.layer = 8;
         base.DestroyItem();
     }

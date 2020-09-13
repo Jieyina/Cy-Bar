@@ -17,8 +17,8 @@ public class Bar : MonoBehaviour
 
     public void RemoveOrder(KeyValuePair<Receipe, GameObject> pair)
     {
-        if (SceneManager.Instance.Factory.CheckProduction(pair))
-            SceneManager.Instance.Factory.StopProduction(pair);
+        if (SceneItemManager.Instance.Factory.CheckProduction(pair))
+            SceneItemManager.Instance.Factory.StopProduction(pair);
         else
         {
             orderedDish.Remove(pair);
@@ -34,10 +34,10 @@ public class Bar : MonoBehaviour
         {
             foreach (KeyValuePair<Receipe, GameObject> pair in orderedDish.ToArray())
             {
-                if (SceneManager.Instance.Storage.CheckEnoughMaterial(pair.Key) && SceneManager.Instance.Factory.HasIdleFactory(pair.Key))
+                if (SceneItemManager.Instance.Storage.CheckEnoughMaterial(pair.Key) && SceneItemManager.Instance.Factory.HasIdleFactory(pair.Key))
                 {
-                    SceneManager.Instance.Storage.ConsumeMaterial(pair.Key);
-                    SceneManager.Instance.Factory.StartProduction(pair);
+                    SceneItemManager.Instance.Storage.ConsumeMaterial(pair.Key);
+                    SceneItemManager.Instance.Factory.StartProduction(pair);
                     orderedDish.Remove(pair);
                     orders[pair.Value].Remove(pair.Key);
                     if (orders[pair.Value].Count == 0)
