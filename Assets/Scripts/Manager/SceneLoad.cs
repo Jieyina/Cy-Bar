@@ -17,6 +17,6 @@ public class SceneLoad : MonoBehaviour
 
     public void QuitEditor()
     {
-        EditorApplication.isPlaying = false;
+        //EditorApplication.isPlaying = false;
     }
 }
