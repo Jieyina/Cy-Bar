@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BarButton : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BarButton : MonoBehaviour
     private GameObject shadePrefab = null;
     [SerializeField]
     private GameObject item = null;
+    [SerializeField]
+    private Text priceText = null;
 
     private GameObject shadow;
     private RaycastHit hit;
@@ -17,7 +20,7 @@ public class BarButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        priceText.text = cost.ToString();
     }
 
     // Update is called once per frame

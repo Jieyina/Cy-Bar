@@ -1635,6 +1635,9 @@ MonoBehaviour:
   starAnim: {fileID: 8695167788134166861}
   starText: {fileID: 5757277948303126876}
   leaveAnim: {fileID: 2131631784823845681}
+  bodySprites:
+  - {fileID: 2803173913271297562}
+  - {fileID: 2803173913276834143}
   foodLeft: {fileID: 2803173915041732405}
   foodRight: {fileID: 3259626322928462282}
 --- !u!1 &2905781323754077045

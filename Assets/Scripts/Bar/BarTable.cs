@@ -40,6 +40,9 @@ public class BarTable : GameItem
                 empty = false;
                 int i = Random.Range(0, customerPrefab.Count);
                 customer = Instantiate(customerPrefab[i], transform.Find("spawnPoint"));
+                int facing = Random.Range(0, 2);
+                if (facing == 1)
+                    customer.GetComponent<Customer>().FaceRight = true;
                 customer.GetComponent<Customer>().Table = gameObject;
             }
         }

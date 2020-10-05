@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FarmButton : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class FarmButton : MonoBehaviour
     private GameObject shadePrefab = null;
     [SerializeField]
     private GameObject item = null;
+    [SerializeField]
+    private Text priceText = null;
+    [SerializeField]
+    private Text productionText = null;
+    [SerializeField]
+    private Text costText = null;
 
     private GameObject shadow;
     private RaycastHit hit;
@@ -25,7 +32,9 @@ public class FarmButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        priceText.text = authorizationCost.ToString();
+        productionText.text = "+ " + produceNum + " " + matName + " / " + growTime + " s";
+        costText.text = "Cost: " + activationCost + " / Term";
     }
 
     // Update is called once per frame

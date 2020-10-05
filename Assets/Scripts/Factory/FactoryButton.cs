@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FactoryButton : MonoBehaviour
 {
@@ -25,6 +26,12 @@ public class FactoryButton : MonoBehaviour
     private GameObject shadePrefab = null;
     [SerializeField]
     private GameObject item = null;
+    [SerializeField]
+    private Text priceText = null;
+    [SerializeField]
+    private Text productionText = null;
+    [SerializeField]
+    private Transform matDescription = null;
 
     private GameObject shadow;
     private RaycastHit hit;
@@ -72,7 +79,15 @@ public class FactoryButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        priceText.text = buildCost.ToString();
+        productionText.text = "Price " + price + " / " + produceTime + " s";
+        matDescription.GetChild(0).GetComponent<Text>().text = receipeName;
+        for (int i = 0; i < materials.Count; i++)
+        {
+            GameObject matText = matDescription.GetChild(i+1).gameObject;
+            matText.SetActive(true);
+            matText.GetComponent<Text>().text = materials[i] + " x " + amount[i];
+        }
     }
 
     // Update is called once per frame

@@ -25,12 +25,16 @@ public class Customer : GameItem
     [SerializeField]
     private Animator leaveAnim = null;
     [SerializeField]
+    private List<SpriteRenderer> bodySprites = null;
+    [SerializeField]
     private GameObject foodLeft = null;
     [SerializeField]
     private GameObject foodRight = null;
 
     private GameObject table;
     public GameObject Table { set { table = value; } }
+    private bool faceRight = false;
+    public bool FaceRight { set { faceRight = value; } }
 
     private bool waiting;
     private float remainTime;
@@ -64,25 +68,37 @@ public class Customer : GameItem
 
     private IEnumerator StartEat()
     {
-        foodLeft.SetActive(true);
+        if (faceRight)
+            foodRight.SetActive(true);
+        else
+            foodLeft.SetActive(true);
         customerAnim.SetTrigger("eat");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("eat"))
             yield return null;
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
-        foodLeft.SetActive(false);
+        if (faceRight)
+            foodRight.SetActive(false);
+        else
+            foodLeft.SetActive(false);
     }
 
     private IEnumerator FinishOrder()
     {
         timeSlider.gameObject.SetActive(false);
-        foodLeft.SetActive(true);
+        if (faceRight)
+            foodRight.SetActive(true);
+        else
+            foodLeft.SetActive(true);
         customerAnim.SetTrigger("eat");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("eat"))
             yield return null;
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("hold"))
             yield return null;
-        foodLeft.SetActive(false);
+        if (faceRight)
+            foodRight.SetActive(false);
+        else
+            foodLeft.SetActive(false);
         int rating = (int)Mathf.Floor(remainTime / waitTime * 5) + 1;
         if (rating == 6) rating = 5;
         starText.text = "+ " + rating.ToString();
@@ -154,7 +170,10 @@ public class Customer : GameItem
             yield return null;
         while (!starAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
-        foodLeft.SetActive(false);
+        if (faceRight)
+            foodRight.SetActive(false);
+        else
+            foodLeft.SetActive(false);
         customerAnim.SetTrigger("kickOut");
         while (!customerAnim.GetCurrentAnimatorStateInfo(0).IsTag("end"))
             yield return null;
@@ -166,6 +185,11 @@ public class Customer : GameItem
     protected override void Start()
     {
         base.Start();
+        if (faceRight)
+        {
+            foreach (SpriteRenderer sprite in bodySprites)
+                sprite.flipX = true;
+        }
         Receipe foodOrder = SceneItemManager.Instance.Factory.GetRandomFood();
         if (foodOrder != null)
         {
